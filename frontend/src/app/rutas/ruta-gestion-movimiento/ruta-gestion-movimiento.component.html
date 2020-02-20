@@ -1,0 +1,55 @@
+<h1>Gestión de Profesores</h1>
+<span class="ui-float-label">
+  <input id="float-input"
+         type="text"
+         size="30"
+         [(ngModel)]="busquedaMovimiento"
+         pInputText>
+  <label for="float-input">
+    Buscar por nombre
+  </label>
+</span>
+<br>
+<p-button label="Buscar" (click)="buscarMovimientoPorNombre()">
+</p-button>
+<br>
+<br>
+<p-table [value]="movimientosFiltrados()"
+         [paginator]="true"
+         [rows]="FILAS">
+  <ng-template pTemplate="caption">
+    Lista de Profesores
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Fecha</th>
+      <th>Estado</th>
+    </tr>
+    <tr>
+      <th>
+        <input type="text"
+               pInputText
+               name="nombre"
+               [(ngModel)]="fechaFiltrado"
+        />
+      </th>
+      <th>
+        <input type="text"
+               pInputText
+               name="apellido"
+               [(ngModel)]="estadoFiltrado"/>
+      </th>
+
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-movimiento>
+    <tr>
+      <td>{{movimiento.fecha}}</td>
+      <td>{{movimiento.estado}}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+// npm install @fullcalendar/core
+// npm install chart.js
+// npm install quill
