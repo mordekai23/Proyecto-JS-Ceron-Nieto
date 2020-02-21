@@ -14,6 +14,8 @@ export class ModalEditarAreaComponent implements OnInit {
   idPiso="";
   url = 'http://localhost:1337';
   pisos=[];
+  idEdificio="";
+  edificios=[];
   constructor(
     public dialogRef:MatDialogRef<ModalEditarAreaComponent>,
     private readonly _httpClient: HttpClient,
@@ -22,9 +24,47 @@ export class ModalEditarAreaComponent implements OnInit {
 
   ngOnInit() {
 
-    //consultar los pisos
+    //consultar los edificios
+    const urlEdificio = this.url + '/edificio';
+    const edificios$ = this._httpClient.get(
+      urlEdificio
+    );
+    edificios$
+      .subscribe(
+        (edificios: any[]) => { // TRY
+          console.log('edificios: ', edificios);
+          this.edificios = edificios;
+        },
+        (error) => { // CATCH
+          console.error({
+            error: error,
+            mensaje: 'Error consultando edificios'
+          })
+        }
+      );
 
-    const urlPiso = this.url + '/piso';
+    console.log('datos en modal', this.data);
+
+    if (this.data != null) {
+
+      this.nombre = this.data.area.nombre;
+      this.descripcion = this.data.area.descripcion;
+      this.estado = this.data.area.estado;
+      this.idEdificio= this.data.area.idEdificio;
+      this.consultarPisosDelEdificio(this.idEdificio);
+      this.idPiso= this.data.area.idPiso;
+    }
+  }
+
+
+  consultarPisosDelEdificio(evento)
+  {
+    //consultar los pisos
+   // console.log('evento: ', evento);
+    const dato= evento;
+    console.log('dato: ', dato); //http://localhost:1337/piso?idEdificio=1
+    const urlPiso = this.url + '/piso?idEdificio='+dato;
+    console.log('url: ', urlPiso);
     const pisos$ = this._httpClient.get(
       urlPiso
     );
@@ -42,15 +82,8 @@ export class ModalEditarAreaComponent implements OnInit {
         }
       );
 
-    console.log('datos en modal', this.data);
-    if (this.data != null) {
-      this.nombre = this.data.area.nombre;
-      this.descripcion = this.data.area.descripcion;
-      this.estado = this.data.area.estado;
-      this.idPiso= this.data.area.idPiso;
-
-    }
   }
+
 
   cancelar()
   {
@@ -63,7 +96,8 @@ export class ModalEditarAreaComponent implements OnInit {
       nombre:this.nombre,
       descripcion:this.descripcion,
       estado:this.estado,
-      idPido:this.idPiso
+      idPiso:this.idPiso,
+      idEdificio:this.idEdificio,
     })
   }
 

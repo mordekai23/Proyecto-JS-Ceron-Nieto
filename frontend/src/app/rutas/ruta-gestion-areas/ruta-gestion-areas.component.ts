@@ -127,9 +127,16 @@ export class RutaGestionAreasComponent implements OnInit {
                 return area.id === id;
               }
             );
+          console.log('datos siiii ', datos);
+console.log('areasn antes de actualizar: ', this.areas[2]);
           this.areas[indice].nombre = datos.nombre;
           this.areas[indice].descripcion = datos.descripcion;
           this.areas[indice].estado = datos.estado;
+          this.areas[indice].idEdificio = datos.idEdificio;
+          this.areas[indice].idPiso = datos.idPiso;
+
+          console.log('areasn despuese de actualizar: ', this.areas[2]);
+
         },
         (error) => { // catch
           console.error('error en el subscribe', error)
@@ -184,11 +191,7 @@ export class RutaGestionAreasComponent implements OnInit {
           return area.descripcion.toLowerCase().includes(this.descripcionFiltrado.toLowerCase());
         }
       )
-      .filter(
-        (area) => {
-          return area.estado.toLowerCase().includes(this.estadoFiltrado.toLowerCase());
-        }
-      )
+
 
       ;
   }

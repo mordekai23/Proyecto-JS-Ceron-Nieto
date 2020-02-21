@@ -11,22 +11,28 @@ module.exports = {
     nombre: {
       type: 'string'
     },
-    description: {
+    descripcion: {
       type: 'string'
     },
     estado: {
       type: 'string'
     },
 
-    idPiso: {
-      model: 'piso',
+    idDepartamento: {
+      model: 'departamento',
       required:true
     },
 
-    sensorAreaDelArea:{
-      collection:'sensorArea', //nombre del modelo hijo
+    sensorDelArea:{
+      collection:'sensor', //nombre del modelo hijo
+      via: 'idArea'  //nombre del campo foreing key en la tabla hijo
+    },
+
+    areaUsuarioDelArea:{
+      collection:'areaUsuario', //nombre del modelo hijo
       via: 'idArea'  //nombre del campo foreing key en la tabla hijo
     }
+
 
      },
 

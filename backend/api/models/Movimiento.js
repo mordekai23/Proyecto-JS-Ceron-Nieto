@@ -16,8 +16,8 @@ module.exports = {
       type: 'boolean'
     },
 
-    idSensorArea: {
-      model: 'sensorArea',
+    idSensor: {
+      model: 'sensor',
       required:true
     },
   },

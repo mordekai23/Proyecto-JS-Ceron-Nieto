@@ -44,11 +44,6 @@
                [(ngModel)]="descripcionFiltrado"/>
       </th>
       <th>
-        <input type="text"
-               pInputText
-               name="estado"
-               [(ngModel)]="estadoFiltrado"
-        />
       </th>
       <th>
       </th>
@@ -58,7 +53,7 @@
     <tr>
       <td>{{area.nombre}}</td>
       <td>{{area.descripcion}}</td>
-      <td>{{area.estado}}</td>
+      <td> <mat-checkbox  checked="{{area.estado}}" Disabled></mat-checkbox></td>
       <td>
         <p-button label="EDITAR" (click)="editar(area)">
         </p-button>
