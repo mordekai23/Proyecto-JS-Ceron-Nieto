@@ -8,8 +8,38 @@
  * For more information on seeding your app with fake data, check out:
  * https://sailsjs.com/config/bootstrap
  */
+const arduino = require('arduino-node');
+const arduLatest = arduino({path: 'bin'});
+arduLatest.run(['--verify', './arduino/sketch_feb17a.ino'], (err, out) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log(out.stdout);
+});
+
+const ardu180 = arduino({path: 'bin', version: '1.8.0'});
+
+ardu180.run(['--verify', './arduino/sketch_feb17a.ino'], (err, out) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log(out.stdout);
+});
+
 
 module.exports.bootstrap = async function() {
+
+
+  setInterval(
+    ()=>{
+      const valor = ardu180;
+      console.log('asd11111')
+    },
+    timeout: 2000
+  )
+  console.log('asdas')
 
   // By convention, this is a good place to set up fake data during development.
   //

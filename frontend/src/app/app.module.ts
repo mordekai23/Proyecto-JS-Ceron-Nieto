@@ -8,6 +8,10 @@ import { RutaGestionarUsuariosComponent } from './rutas/ruta-gestionar-usuarios/
 import { RutaAdministrarPisosComponent } from './rutas/ruta-administrar-pisos/ruta-administrar-pisos.component';
 import { RutaAdministrarSensoresComponent } from './rutas/ruta-administrar-sensores/ruta-administrar-sensores.component';
 import { RutaSensorAreaUsuarioComponent } from './rutas/ruta-sensor-area-usuario/ruta-sensor-area-usuario.component';
+import { ModalEditarUsuarioComponent } from './modales/modal-editar-usuario/modal-editar-usuario.component';
+import { RutaAdministrarDepartamentosComponent } from './rutas/ruta-administrar-departamentos/ruta-administrar-departamentos.component';
+import { ModalEditarDepartamentoComponent } from './modales/modal-editar-departamento/modal-editar-departamento.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,11 +20,15 @@ import { RutaSensorAreaUsuarioComponent } from './rutas/ruta-sensor-area-usuario
     RutaGestionarUsuariosComponent,
     RutaAdministrarPisosComponent,
     RutaAdministrarSensoresComponent,
-    RutaSensorAreaUsuarioComponent
+    RutaSensorAreaUsuarioComponent,
+    ModalEditarUsuarioComponent,
+    RutaAdministrarDepartamentosComponent,
+    ModalEditarDepartamentoComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
