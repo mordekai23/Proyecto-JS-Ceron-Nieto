@@ -11,11 +11,13 @@ export class ModalEditarAreaComponent implements OnInit {
   nombre="";
   descripcion="";
   estado="";
-  idPiso="";
+  idDepartamento="";
   url = 'http://localhost:1337';
-  pisos=[];
+  departamentos=[];
   idEdificio="";
   edificios=[];
+  sensores=[];
+
   constructor(
     public dialogRef:MatDialogRef<ModalEditarAreaComponent>,
     private readonly _httpClient: HttpClient,
@@ -26,14 +28,13 @@ export class ModalEditarAreaComponent implements OnInit {
 
     //consultar los edificios
     const urlEdificio = this.url + '/edificio';
-    const edificios$ = this._httpClient.get(
-      urlEdificio
-    );
+    const edificios$ = this._httpClient.get(urlEdificio);
     edificios$
       .subscribe(
         (edificios: any[]) => { // TRY
           console.log('edificios: ', edificios);
           this.edificios = edificios;
+          //this.consultarSensores();
         },
         (error) => { // CATCH
           console.error({
@@ -51,33 +52,52 @@ export class ModalEditarAreaComponent implements OnInit {
       this.descripcion = this.data.area.descripcion;
       this.estado = this.data.area.estado;
       this.idEdificio= this.data.area.idEdificio;
-      this.consultarPisosDelEdificio(this.idEdificio);
-      this.idPiso= this.data.area.idPiso;
+      this.consultarDepartamentosDelEdificio(this.idEdificio);
+      this.idDepartamento= this.data.area.idDepartamento.id;
     }
   }
 
 
-  consultarPisosDelEdificio(evento)
+  consultarDepartamentosDelEdificio(evento)
   {
-    //consultar los pisos
-   // console.log('evento: ', evento);
     const dato= evento;
-    console.log('dato: ', dato); //http://localhost:1337/piso?idEdificio=1
-    const urlPiso = this.url + '/piso?idEdificio='+dato;
-    console.log('url: ', urlPiso);
-    const pisos$ = this._httpClient.get(
-      urlPiso
+    console.log('dato: ', dato);
+    const urlDepartamento = this.url + '/departamento?idEdificio='+dato;
+    console.log('url: ', urlDepartamento);
+    const departamentos$ = this._httpClient.get(
+      urlDepartamento
     );
-    pisos$
+    departamentos$
       .subscribe(
-        (pisos: any[]) => { // TRY
-          console.log('pisos: ', pisos);
-          this.pisos = pisos;
+        (departamentos: any[]) => { // TRY
+          console.log('departamentos: ', departamentos);
+          this.departamentos = departamentos;
         },
         (error) => { // CATCH
           console.error({
             error: error,
-            mensaje: 'Error consultando pisos'
+            mensaje: 'Error consultando departamentos'
+          })
+        }
+      );
+
+  }
+
+  consultarSensores()
+  {
+    const urlSensor = this.url + '/sensor';
+    console.log('url: ', urlSensor);
+    const sensores$ = this._httpClient.get(urlSensor);
+    sensores$
+      .subscribe(
+        (sensores: any[]) => { // TRY
+          console.log('sensores: ', sensores);
+          this.sensores = sensores;
+        },
+        (error) => { // CATC1H
+          console.error({
+            error: error,
+            mensaje: 'Error consultando sensores'
           })
         }
       );
@@ -96,8 +116,9 @@ export class ModalEditarAreaComponent implements OnInit {
       nombre:this.nombre,
       descripcion:this.descripcion,
       estado:this.estado,
-      idPiso:this.idPiso,
+      idDepartamento:this.idDepartamento,
       idEdificio:this.idEdificio,
+
     })
   }
 

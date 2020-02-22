@@ -21,9 +21,7 @@ export class RutaGestionMovimientoComponent implements OnInit {
 
   ngOnInit() {
     const urlMovimiento = this.url + '/movimiento';
-    const movimientos$ = this._httpClient.get(
-      urlMovimiento
-    );
+    const movimientos$ = this._httpClient.get(urlMovimiento);
     movimientos$
       .subscribe(
         (movimientos: any[]) => { // TRY
@@ -58,11 +56,6 @@ export class RutaGestionMovimientoComponent implements OnInit {
       .filter(
         (movimiento) => {
           return movimiento.fecha.toLowerCase().includes(this.fechaFiltrado.toLowerCase());
-        }
-      )
-      .filter(
-        (movimiento) => {
-          return movimiento.estado.toLowerCase().includes(this.estadoFiltrado.toLowerCase());
         }
       )
 

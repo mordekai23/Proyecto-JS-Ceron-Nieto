@@ -23,7 +23,7 @@ module.exports = {
       required:true
     },
 
-    sensorDelArea:{
+    sensoresDelArea:{
       collection:'sensor', //nombre del modelo hijo
       via: 'idArea'  //nombre del campo foreing key en la tabla hijo
     },

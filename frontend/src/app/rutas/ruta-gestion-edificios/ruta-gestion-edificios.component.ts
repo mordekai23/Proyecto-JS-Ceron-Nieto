@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FILAS } from 'src/app/constantes/numero-filas-por-tablas';
 import {HttpClient} from "@angular/common/http";
-import {AreaRestService} from "../../services/rest/area-rest.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ModalEditarEdificioComponent} from "../../modales/modal-editar-edificio/modal-editar-edificio.component";
 import {EdificioRestService} from "../../services/rest/edificio-rest.service";
@@ -84,7 +83,7 @@ busquedaEdificio ='';
                 return edificio.id === edificioGuardado.id;
               }
             );
-          this.edificios.push(datos);
+          this.edificios.push(edificioGuardado);
         },
         (error) => { // catch
           console.error(error)

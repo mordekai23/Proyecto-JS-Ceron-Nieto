@@ -1,19 +1,18 @@
+<div *ngIf="_authService.estaLogeado">
+  <div class="right">
+    <mat-label>{{_authService.sesion.correoElectronico}}</mat-label>
+    <button mat-button id="salir" name="salir" (click)="salir()">Salir</button>
+  </div>
 <ul>
   <li>
-    <a [routerLink]="['/login']">Login</a>
+    <a [routerLink]="['inicio/gestion-edificios']">Gestion Edificios</a>
   </li>
   <li>
-    <a [routerLink]="['/gestion-edificios']">Gestion Edificios</a>
+    <a [routerLink]="['inicio/gestion-areas']">Gestión Areas</a>
   </li>
   <li>
-    <a [routerLink]="['/gestion-areas']">Gestión Areas</a>
-  </li>
-  <li>
-    <a [routerLink]="['/gestion-sensor-area']">Gestion Sensor Area</a>
-  </li>
-  <li>
-    <a [routerLink]="['/gestion-movimiento']">Historico Movimientos</a>
+    <a [routerLink]="['inicio/gestion-movimiento']">Historico Movimientos</a>
   </li>
 </ul>
-
+</div>
 <router-outlet></router-outlet>

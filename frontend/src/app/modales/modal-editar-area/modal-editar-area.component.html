@@ -1,22 +1,19 @@
 <h1 mat-dialog-title>Area</h1>
 <div mat-dialog-content>
   <form #formularioEditar="ngForm">
-
     <mat-form-field class="example-full-width" >
       <mat-label>Edificio</mat-label>
-      <mat-select id="edificioId" name="idEdificio" [(ngModel)]="idEdificio" required (selectionChange)="consultarPisosDelEdificio($event.value)">
+      <mat-select id="edificioId" name="idEdificio" [(ngModel)]="idEdificio" required (selectionChange)="consultarDepartamentosDelEdificio($event.value)">
         <mat-option [value]="edf.id" *ngFor="let edf of edificios" >
           {{edf.nombre}}
         </mat-option>
       </mat-select>
     </mat-form-field>
-
-
       <mat-form-field class="example-full-width" >
-        <mat-label>Piso</mat-label>
-        <mat-select id="pisoId" name="idPiso" [(ngModel)]="idPiso" required>
-          <mat-option [value]="pis.id" *ngFor="let pis of pisos" >
-            {{pis.numero}}
+        <mat-label>Departamento</mat-label>
+        <mat-select id="departamentoId" name="idDepartamento" [(ngModel)]="idDepartamento" required>
+          <mat-option [value]="dep.id" *ngFor="let dep of departamentos" >
+            {{dep.descripcion}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -29,10 +26,8 @@
     <mat-form-field class="example-full-width">
       <mat-label>Descripción</mat-label>
       <input matInput placeholder="Descripción" id="descripcionId" type="text" name="descripcion" [(ngModel)]="descripcion"
-             required minlength="3" maxlength="30">
+             required minlength="3" maxlength="50">
     </mat-form-field>
-
-
 
     <mat-checkbox id="estadoId" name="estado" [(ngModel)]="estado">Estado</mat-checkbox>
 

@@ -82,7 +82,7 @@ export class RutaGestionAreasComponent implements OnInit {
                 return area.id === areaGuardado.id;
               }
             );
-          this.areas.push(datos);
+          this.areas.push(areaGuardado);
         },
         (error) => { // catch
           console.error(error)
@@ -128,12 +128,12 @@ export class RutaGestionAreasComponent implements OnInit {
               }
             );
           console.log('datos siiii ', datos);
-console.log('areasn antes de actualizar: ', this.areas[2]);
+          console.log('areasn antes de actualizar: ', this.areas[2]);
           this.areas[indice].nombre = datos.nombre;
           this.areas[indice].descripcion = datos.descripcion;
           this.areas[indice].estado = datos.estado;
           this.areas[indice].idEdificio = datos.idEdificio;
-          this.areas[indice].idPiso = datos.idPiso;
+          this.areas[indice].idDepartamento = datos.idDepartamento;
 
           console.log('areasn despuese de actualizar: ', this.areas[2]);
 
