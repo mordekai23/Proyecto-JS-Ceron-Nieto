@@ -8,12 +8,14 @@
 module.exports = {
 
   attributes: {
-
     fecha: {
       type: 'string'
     },
     estadoNotificacion: {
       type: 'boolean'
+    },
+    dato: {
+      type:'string'
     },
 
     idSensor: {

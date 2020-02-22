@@ -11,7 +11,8 @@ module.exports = {
     codigoInterno: {
       type: 'string'
     },
-    Nombre: {
+
+    nombre: {
       type: 'string'
     },
 
