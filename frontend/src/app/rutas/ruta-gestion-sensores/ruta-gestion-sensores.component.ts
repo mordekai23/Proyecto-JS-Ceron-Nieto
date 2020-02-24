@@ -1,41 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { FILAS } from 'src/app/constantes/numero-filas-por-tablas';
-import {HttpClient} from "@angular/common/http";
+import {SensorRestService} from "../../services/rest/sensor_rest.service";
 import {MatDialog} from "@angular/material/dialog";
-import {EdificioRestService} from "../../services/rest/edificio-rest.service";
-import {AreaUsuarioRestService} from "../../services/rest/areaUsuario-rest.service";
-import {ModalEditarEdificioComponent} from "../../modales/modal-editar-edificio/modal-editar-edificio.component";
-import {ModalEditarDepartamentoComponent} from "../../modales/modal-editar-departamento/modal-editar-departamento.component";
+import {HttpClient} from "@angular/common/http";
+import {ModalEditarSensorComponent} from "../../modales/modal-editar-sensor/modal-editar-sensor.component";
 
 @Component({
-  selector: 'app-ruta-sensor-area-usuario',
-  templateUrl: './ruta-sensor-area-usuario.component.html',
-  styleUrls: ['./ruta-sensor-area-usuario.component.scss']
+  selector: 'app-ruta-gestion-sensores',
+  templateUrl: './ruta-gestion-sensores.component.html',
+  styleUrls: ['./ruta-gestion-sensores.component.scss']
 })
-export class RutaSensorAreaUsuarioComponent implements OnInit {
+export class RutaGestionSensoresComponent implements OnInit {
   url='http://localhost:1337';
-  areasUsuarios=[];
+  sensores=[];
   FILAS = FILAS;
   nombreFiltrado="";
-  ubicacionFiltradp="";
-  estadoFiltrado="";
+  codigoInternoFiltrado="";
   busquedaEntidad ='';
   constructor(
     private readonly _httpClient: HttpClient,
     private readonly  _matDialog:MatDialog,
-    private readonly  _areaUsuarioRestService: AreaUsuarioRestService,
+    private readonly  _sensorRestService: SensorRestService,
   ) { }
 
   ngOnInit() {
-    const urlGestion = this.url + '/departamento';
+    const urlGestion = this.url + '/sensor';
     const respuestaConsulta$ = this._httpClient.get(
       urlGestion
     );
     respuestaConsulta$
       .subscribe(
         (datos: any[]) => { // TRY
-          console.log('edificios: ', datos);
-          this.areasUsuarios = datos;
+          console.log('sensores: ', datos);
+          this.sensores = datos;
         },
         (error) => { // CATCH
           console.error({
@@ -49,7 +46,7 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
   guardar() {
     console.log('guardando datos');
     const matDialogRefModalEditar = this._matDialog
-      .open(ModalEditarDepartamentoComponent,
+      .open(ModalEditarSensorComponent,
         {width: '500px'}
       );
     const respuestaDialogo$ = matDialogRefModalEditar
@@ -71,19 +68,19 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
       );
   }
   guardarHTTP(datos) {
-    const entidadGuardada$ = this._areaUsuarioRestService
+    const entidadGuardada$ = this._sensorRestService
       .crear(datos);
     entidadGuardada$
       .subscribe(
         (datoGuardado: any) => { // try
           console.log(datoGuardado);
-          const indice = this.areasUsuarios
+          const indice = this.sensores
             .findIndex(
               (entidad) => {
                 return entidad.id === datoGuardado.id;
               }
             );
-          this.areasUsuarios.push(datoGuardado);
+          this.sensores.push(datoGuardado);
         },
         (error) => { // catch
           console.error(error)
@@ -94,8 +91,8 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
     console.log('Editando entidad', entidad);
     const matDialogRefModalEditar = this._matDialog
       .open(
-        ModalEditarDepartamentoComponent,
-        {width: '500px', data: {edificio: entidad}}
+        ModalEditarSensorComponent,
+        {width: '500px', data: {sensor: entidad}}
       );
     const respuestaDialogo$ = matDialogRefModalEditar
       .afterClosed();
@@ -117,20 +114,22 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
       );
   }
   editarHTTP(id: number, datos) {
-    const entidadEditada$ = this._areaUsuarioRestService.editar(id, datos);
+    const entidadEditada$ = this._sensorRestService.editar(id, datos);
     entidadEditada$
       .subscribe(
         (datoEditada: any) => { // try
           console.log('ediProf HTTP', datoEditada);
-          const indice = this.areasUsuarios
+          const indice = this.sensores
             .findIndex(
-              (edificio) => {
-                return edificio.id === id;
+              (sensor) => {
+                return sensor.id === id;
               }
             );
-          this.areasUsuarios[indice].nombre = datos.nombre;
-          this.areasUsuarios[indice].ubicacion = datos.ubicacion;
-          this.areasUsuarios[indice].estado = datos.estado;
+          this.sensores[indice].codigoInterno = datos.codigoInterno;
+          this.sensores[indice].nombre = datos.nombre;
+          this.sensores[indice].idEdificio= datos.idEdificio;
+          this.sensores[indice].idDepartamento= datos.idDepartamento;
+          this.sensores[indice].idArea = datos.idArea;
         },
         (error) => { // catch
           console.error('error en el subscribe', error)
@@ -140,19 +139,19 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
   eliminar(entidad) {
     console.log('Eliminando entidad', entidad);
 
-    const eliminar$ = this._areaUsuarioRestService
+    const eliminar$ = this._sensorRestService
       .eliminar(entidad.id);
 
     eliminar$
       .subscribe( entidadEliminada=> {
           console.log('edificio eliminado',entidadEliminada);
-          const indice = this.areasUsuarios
+          const indice = this.sensores
             .findIndex(
               (entidadBuscada) => {
                 return entidadBuscada.id === entidad.id;
               }
             );
-          this.areasUsuarios.splice(indice, 1);
+          this.sensores.splice(indice, 1);
 
         },
         (error) => {
@@ -162,11 +161,11 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
   }
   buscarEdificioPorNombre()
   {
-    const busqueda$ = this._areaUsuarioRestService
+    const busqueda$ = this._sensorRestService
       .buscar(this.busquedaEntidad);
     busqueda$
       .subscribe( datos=> {
-          this.areasUsuarios = datos;
+          this.sensores = datos;
         },
         (error) => {
           console.error(error);
@@ -174,15 +173,15 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
       )
   }
   edificiosFiltrados() {
-    return this.areasUsuarios
+    return this.sensores
       .filter(
-        (edificio) => {
-          return edificio.nombre.toLowerCase().includes(this.nombreFiltrado.toLowerCase());
+        (entidad) => {
+          return entidad.nombre.toLowerCase().includes(this.nombreFiltrado.toLowerCase());
         }
       )
       .filter(
-        (edificio) => {
-          return edificio.ubicacion.toLowerCase().includes(this.ubicacionFiltradp.toLowerCase());
+        (entidad) => {
+          return entidad.codigoInterno.toLowerCase().includes(this.codigoInternoFiltrado.toLowerCase());
         }
       )
 
@@ -190,4 +189,3 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
   }
 
 }
-

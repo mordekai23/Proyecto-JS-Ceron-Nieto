@@ -2,28 +2,26 @@ import { Component, OnInit } from '@angular/core';
 import { FILAS } from 'src/app/constantes/numero-filas-por-tablas';
 import {HttpClient} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
-import {EdificioRestService} from "../../services/rest/edificio-rest.service";
-import {AreaUsuarioRestService} from "../../services/rest/areaUsuario-rest.service";
-import {ModalEditarEdificioComponent} from "../../modales/modal-editar-edificio/modal-editar-edificio.component";
+import {DepartamentoRestService} from "../../services/rest/departamento-rest.service";
 import {ModalEditarDepartamentoComponent} from "../../modales/modal-editar-departamento/modal-editar-departamento.component";
 
 @Component({
-  selector: 'app-ruta-sensor-area-usuario',
-  templateUrl: './ruta-sensor-area-usuario.component.html',
-  styleUrls: ['./ruta-sensor-area-usuario.component.scss']
+  selector: 'app-ruta-gestion-departamentos',
+  templateUrl: './ruta-gestion-departamentos.component.html',
+  styleUrls: ['./ruta-gestion-departamentos.component.scss']
 })
-export class RutaSensorAreaUsuarioComponent implements OnInit {
+export class RutaGestionDepartamentosComponent implements OnInit {
   url='http://localhost:1337';
-  areasUsuarios=[];
+  departamentos=[];
   FILAS = FILAS;
-  nombreFiltrado="";
-  ubicacionFiltradp="";
+  numeroDepartamentoFiltrado="";
+  descripcionFiltrado="";
   estadoFiltrado="";
   busquedaEntidad ='';
   constructor(
     private readonly _httpClient: HttpClient,
     private readonly  _matDialog:MatDialog,
-    private readonly  _areaUsuarioRestService: AreaUsuarioRestService,
+    private readonly  _departamentoRestService: DepartamentoRestService,
   ) { }
 
   ngOnInit() {
@@ -34,8 +32,8 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
     respuestaConsulta$
       .subscribe(
         (datos: any[]) => { // TRY
-          console.log('edificios: ', datos);
-          this.areasUsuarios = datos;
+          console.log('departamentos: ', datos);
+          this.departamentos = datos;
         },
         (error) => { // CATCH
           console.error({
@@ -71,19 +69,19 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
       );
   }
   guardarHTTP(datos) {
-    const entidadGuardada$ = this._areaUsuarioRestService
+    const entidadGuardada$ = this._departamentoRestService
       .crear(datos);
     entidadGuardada$
       .subscribe(
         (datoGuardado: any) => { // try
           console.log(datoGuardado);
-          const indice = this.areasUsuarios
+          const indice = this.departamentos
             .findIndex(
               (entidad) => {
                 return entidad.id === datoGuardado.id;
               }
             );
-          this.areasUsuarios.push(datoGuardado);
+          this.departamentos.push(datoGuardado);
         },
         (error) => { // catch
           console.error(error)
@@ -95,7 +93,7 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
     const matDialogRefModalEditar = this._matDialog
       .open(
         ModalEditarDepartamentoComponent,
-        {width: '500px', data: {edificio: entidad}}
+        {width: '500px', data: {departamento: entidad}}
       );
     const respuestaDialogo$ = matDialogRefModalEditar
       .afterClosed();
@@ -117,20 +115,21 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
       );
   }
   editarHTTP(id: number, datos) {
-    const entidadEditada$ = this._areaUsuarioRestService.editar(id, datos);
+    const entidadEditada$ = this._departamentoRestService.editar(id, datos);
     entidadEditada$
       .subscribe(
         (datoEditada: any) => { // try
           console.log('ediProf HTTP', datoEditada);
-          const indice = this.areasUsuarios
+          const indice = this.departamentos
             .findIndex(
               (edificio) => {
                 return edificio.id === id;
               }
             );
-          this.areasUsuarios[indice].nombre = datos.nombre;
-          this.areasUsuarios[indice].ubicacion = datos.ubicacion;
-          this.areasUsuarios[indice].estado = datos.estado;
+          this.departamentos[indice].numeroDeDepartamento = datos.numeroDeDepartamento;
+          this.departamentos[indice].descripcion = datos.descripcion;
+          this.departamentos[indice].estado = datos.estado;
+          this.departamentos[indice].idEdicicio= datos.idEdificio;
         },
         (error) => { // catch
           console.error('error en el subscribe', error)
@@ -140,19 +139,19 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
   eliminar(entidad) {
     console.log('Eliminando entidad', entidad);
 
-    const eliminar$ = this._areaUsuarioRestService
+    const eliminar$ = this._departamentoRestService
       .eliminar(entidad.id);
 
     eliminar$
       .subscribe( entidadEliminada=> {
           console.log('edificio eliminado',entidadEliminada);
-          const indice = this.areasUsuarios
+          const indice = this.departamentos
             .findIndex(
               (entidadBuscada) => {
                 return entidadBuscada.id === entidad.id;
               }
             );
-          this.areasUsuarios.splice(indice, 1);
+          this.departamentos.splice(indice, 1);
 
         },
         (error) => {
@@ -162,11 +161,11 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
   }
   buscarEdificioPorNombre()
   {
-    const busqueda$ = this._areaUsuarioRestService
+    const busqueda$ = this._departamentoRestService
       .buscar(this.busquedaEntidad);
     busqueda$
       .subscribe( datos=> {
-          this.areasUsuarios = datos;
+          this.departamentos = datos;
         },
         (error) => {
           console.error(error);
@@ -174,20 +173,15 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
       )
   }
   edificiosFiltrados() {
-    return this.areasUsuarios
+    return this.departamentos
       .filter(
-        (edificio) => {
-          return edificio.nombre.toLowerCase().includes(this.nombreFiltrado.toLowerCase());
+        (entidad) => {
+          return entidad.descripcion.toLowerCase().includes(this.descripcionFiltrado.toLowerCase());
         }
       )
-      .filter(
-        (edificio) => {
-          return edificio.ubicacion.toLowerCase().includes(this.ubicacionFiltradp.toLowerCase());
-        }
-      )
+
 
       ;
   }
 
 }
-
