@@ -54,19 +54,12 @@ export class ModalEditarSensorComponent implements OnInit {
     if (this.data != null) {
       this.nombre = this.data.sensor.nombre;
       this.codigoInterno = this.data.sensor.codigoInterno;
-     // this.idEdificio= this.data.sensor.idEdificio;
+     this.idEdificio= this.data.sensor.idEdificio;
 
       //this.idDepartamento= this.data.sensor.idDepartamento;
 
       //this.idArea= this.data.sensor.idArea.id;
-      if(this.data.sensor.idEdificio.id === undefined)
-      {
-        this.idEdificio=this.data.sensor.idEdificio;
-      }
-      else
-      {
-        this.idEdificio=this.data.sensor.idEdificio.id;
-      }
+
       this.consultarDepartamentosDelEdificio(this.idEdificio);
       if(this.data.sensor.idDepartamento.id === undefined)
       {

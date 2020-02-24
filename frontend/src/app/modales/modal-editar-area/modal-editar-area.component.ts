@@ -50,17 +50,10 @@ export class ModalEditarAreaComponent implements OnInit {
       this.nombre = this.data.area.nombre;
       this.descripcion = this.data.area.descripcion;
       this.estado = this.data.area.estado;
-      //this.idEdificio= this.data.area.idEdificio;
+      this.idEdificio= this.data.area.idEdificio;
 
       //this.idDepartamento= this.data.area.idDepartamento.id;
-      if(this.data.area.idEdificio.id === undefined)
-      {
-        this.idEdificio=this.data.area.idEdificio;
-      }
-      else
-      {
-        this.idEdificio=this.data.area.idEdificio.id;
-      }
+
       this.consultarDepartamentosDelEdificio(this.idEdificio);
       if(this.data.area.idDepartamento.id === undefined)
       {
