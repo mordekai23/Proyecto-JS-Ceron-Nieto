@@ -1,29 +1,31 @@
-#include <Boards.h>
-#include <Firmata.h>
-#include <FirmataConstants.h>
-#include <FirmataDefines.h>
-#include <FirmataMarshaller.h>
-#include <FirmataParser.h>
-
-
-const int PIR = 7;
-int pirLectura = 0;
-
-void setup(){
-  pinMode(PIR, INPUT);
-  Serial.begin(9600);
-  //dht.begin();
+const int EchoPin = 3;
+const int TriggerPin = 2;
+ 
+void setup() {
+   Serial.begin(9600);
+   pinMode(TriggerPin, OUTPUT);
+   pinMode(EchoPin, INPUT);
 }
-
-void loop(){
-  pirLectura = digitalRead(PIR);
-  if(pirLectura == HIGH){
-    Serial.println("Movimiento");
-    delay(1200);
-  }
-  else{
-    Serial.println("Nadaaaaa");
-    delay(1200);
-  }
-
+ 
+void loop() {
+   int cm = ping(TriggerPin, EchoPin);
+   Serial.println(TriggerPin);
+   Serial.print("Distancia: ");
+   Serial.println(cm);
+   delay(1000);
+}
+ 
+int ping(int TriggerPin, int EchoPin) {
+   long duration, distanceCm;
+   
+   digitalWrite(TriggerPin, LOW);  //para generar un pulso limpio ponemos a LOW 4us
+   delayMicroseconds(4);
+   digitalWrite(TriggerPin, HIGH);  //generamos Trigger (disparo) de 10us
+   delayMicroseconds(10);
+   digitalWrite(TriggerPin, LOW);
+   
+   duration = pulseIn(EchoPin, HIGH);  //medimos el tiempo entre pulsos, en microsegundos
+   
+   distanceCm = duration * 10 / 292/ 2;   //convertimos a distancia, en cm
+   return distanceCm;
 }

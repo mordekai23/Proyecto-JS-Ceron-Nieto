@@ -1,8 +1,16 @@
 var five = require('johnny-five');
 var board = new five.Board({
-  board: 'uno',
   port: "COM5"
 });
+
+module.exports.johnny = {
+  board:board,
+  five:five,
+  proximity:null
+};
+
+
+
 
 /*board.on("ready", function () {
   var motion = new sails.config.johnny.five.Motion({
