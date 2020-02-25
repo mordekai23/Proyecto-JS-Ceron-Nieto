@@ -81,7 +81,7 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
     var areaUsuarioObjeto = {
       idUsuario : "",
       idArea: "",
-      enviarNotificacion : "S",
+      enviarNotificacion : "AC",
       idDepartamento:0,
       idEdificio:0,
     };
@@ -135,7 +135,6 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
         }
       );
   }
-
   editarUsuarioHTTP(id: number, datos) {
     var areaUsuarioObjeto = {
       idUsuario : "",
@@ -176,6 +175,7 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
         )
     }
   }
+
   buscarUsuarioPorNombre() {
     const busqueda$ = this._areaUsuarioRestService
       .buscar(this.busquedaUsuario);

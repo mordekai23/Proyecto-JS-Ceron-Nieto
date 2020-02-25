@@ -14,9 +14,7 @@ export class RutaGestionDepartamentosComponent implements OnInit {
   url='http://localhost:1337';
   departamentos=[];
   FILAS = FILAS;
-  numeroDepartamentoFiltrado="";
   descripcionFiltrado="";
-  estadoFiltrado="";
   busquedaEntidad ='';
   constructor(
     private readonly _httpClient: HttpClient,

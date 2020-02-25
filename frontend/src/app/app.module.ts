@@ -41,6 +41,9 @@ import { ModalEditarAreaUsuarioComponent } from './modales/modal-editar-area-usu
 import { RutaActivarNotificacionComponent } from './rutas/ruta-activar-notificacion/ruta-activar-notificacion.component';
 import { RutaRecibirNotificacionComponent } from './rutas/ruta-recibir-notificacion/ruta-recibir-notificacion.component';
 import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -81,6 +84,9 @@ import {MatSlideToggleModule} from "@angular/material/slide-toggle";
     PickListModule,
     MatListModule,
     MatSlideToggleModule,
+    MatCardModule,
+    MatIconModule,
+    MatToolbarModule,
 
   ],
   entryComponents: [

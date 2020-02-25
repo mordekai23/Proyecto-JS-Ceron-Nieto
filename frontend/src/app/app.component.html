@@ -290,7 +290,7 @@
 <div class="toolbar" role="banner" *ngIf="_authService.estaLogeado">
 
   <span>          </span>
-  <button mat-button [matMenuTriggerFor]="belowMenu1">Administración</button>
+  <button mat-button [matMenuTriggerFor]="belowMenu1" >Administración</button>
   <mat-menu #belowMenu1="matMenu" yPosition="below">
     <button mat-menu-item [routerLink]="['inicio/gestion-edificios']">Edificios</button>
     <button mat-menu-item [routerLink]="['inicio/gestion-departamentos']">Departamentos</button>
@@ -306,7 +306,7 @@
   </mat-menu>
   <button mat-button [matMenuTriggerFor]="belowMenu4">Historico</button>
   <mat-menu #belowMenu4="matMenu" yPosition="below">
-    <button mat-menu-item [routerLink]="['inicio/gestion-movimiento']">Gestión de usuarios</button>
+    <button mat-menu-item [routerLink]="['inicio/gestion-movimiento']">Historial de Movimientos</button>
   </mat-menu>
   <button mat-button [matMenuTriggerFor]="belowMenu3">Seguridad</button>
   <mat-menu #belowMenu3="matMenu" yPosition="below">

@@ -12,6 +12,8 @@ import {RutaGestionSensoresComponent} from "./rutas/ruta-gestion-sensores/ruta-g
 import {RutaSensorAreaUsuarioComponent} from "./rutas/ruta-sensor-area-usuario/ruta-sensor-area-usuario.component";
 import {RutaActivarNotificacionComponent} from "./rutas/ruta-activar-notificacion/ruta-activar-notificacion.component";
 import {RutaRecibirNotificacionComponent} from "./rutas/ruta-recibir-notificacion/ruta-recibir-notificacion.component";
+import {EsAdministradorPolicy} from "./services/auth/politicas/es_administrador.policy";
+import {EsUsuarioPolicy} from "./services/auth/politicas/es_usuario.policy";
 
 
 const routes: Routes = [
@@ -36,42 +38,42 @@ const routes: Routes = [
   {
     path:'inicio/gestion-edificios',
     component :RutaGestionEdificiosComponent,
-    canActivate: [EstaLogeadoPolicy]
+    canActivate: [EstaLogeadoPolicy,EsAdministradorPolicy]
   },
   {
     path:'inicio/gestion-departamentos',
     component :RutaGestionDepartamentosComponent,
-    canActivate: [EstaLogeadoPolicy]
+    canActivate: [EstaLogeadoPolicy, EsAdministradorPolicy]
   },
   {
     path:'inicio/gestion-areas',
     component :RutaGestionAreasComponent,
-    canActivate: [EstaLogeadoPolicy],
+    canActivate: [EstaLogeadoPolicy,EsAdministradorPolicy],
   },
   {
     path:'inicio/gestion-sensores',
     component :RutaGestionSensoresComponent,
-    canActivate: [EstaLogeadoPolicy]
+    canActivate: [EstaLogeadoPolicy,EsAdministradorPolicy]
   },
   {
     path:'inicio/gestion-area-usuario',
     component :RutaSensorAreaUsuarioComponent,
-    canActivate: [EstaLogeadoPolicy]
+    canActivate: [EstaLogeadoPolicy,EsAdministradorPolicy]
   },
   {
     path:'inicio/gestion-movimiento',
     component :RutaGestionMovimientoComponent,
-    canActivate: [EstaLogeadoPolicy],
+    canActivate: [EstaLogeadoPolicy,EsAdministradorPolicy],
   },
   {
     path:'inicio/activar-notificacion',
     component :RutaActivarNotificacionComponent,
-    canActivate: [EstaLogeadoPolicy],
+    canActivate: [EstaLogeadoPolicy,EsUsuarioPolicy],
   },
   {
     path:'inicio/consultar-notificacion',
     component :RutaRecibirNotificacionComponent,
-    canActivate: [EstaLogeadoPolicy],
+    canActivate: [EstaLogeadoPolicy,EsUsuarioPolicy],
   },
 ];
 
