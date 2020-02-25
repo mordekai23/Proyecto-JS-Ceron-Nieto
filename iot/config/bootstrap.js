@@ -47,18 +47,32 @@ var board = new  five.Board({
     return proximity.centimeters;
   }
 };*/
-
+const axios = require('axios');
 module.exports.bootstrap =  function(done) {
+
   sails.config.johnny.board.on("ready", function () {
 
     var proximity = new sails.config.johnny.five.Proximity({controller: 'HCSR04', pin: 7});
+    setInterval(
+      () => {
 
-    proximity.on("change", () => {
+      }
+    )
+    proximity.on("change", async () => {
+      var sleep = require('sleep');
       const {centimeters, inches} = proximity;
       console.log("Proximity: ");
       console.log("  cm  : ", centimeters);
       console.log("  in  : ", inches);
       console.log("-----------------");
+      const respuestaServidor = await axios
+        .post('http://localhost:1337/MonitoreoMovimiento',
+          {
+            valor: centimeters
+          }
+        )
+      console.log('Respuesta del servidor', respuestaServidor)
+          sleep.msleep(100);
     });
     done();
   });

@@ -27,7 +27,8 @@
     "sails-hook-grunt": "^4.0.0",
     "sails-hook-orm": "^2.1.1",
     "sails-hook-sockets": "^2.0.0",
-    "serialport": "^8.0.7"
+    "serialport": "^8.0.7",
+    "sleep": "^6.1.0"
   },
   "devDependencies": {
     "eslint": "5.16.0"
