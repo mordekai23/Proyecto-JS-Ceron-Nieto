@@ -1,5 +1,5 @@
 /**
- * Piso.js
+ * Departamento.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -8,11 +8,11 @@
 module.exports = {
 
   attributes: {
-    numero: {
+    numeroDeDepartamento: {
       type: 'number'
     },
-    numeroDepartamentos: {
-      type: 'number'
+    descripcion: {
+      type: 'string'
     },
     estado: {
       type: 'boolean'
@@ -23,9 +23,9 @@ module.exports = {
       required: true
     },
 
-    areasDelPiso:{
+    areasDelDepartamento:{
       collection:'area', //nombre del modelo hijo
-      via: 'idPiso'  //nombre del campo foreing key en la tabla hijo
+      via: 'idDepartamento'  //nombre del campo foreing key en la tabla hijo
     }
 
 

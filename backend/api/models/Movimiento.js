@@ -8,16 +8,18 @@
 module.exports = {
 
   attributes: {
-
     fecha: {
       type: 'string'
     },
     estadoNotificacion: {
       type: 'boolean'
     },
+    dato: {
+      type:'string'
+    },
 
-    idSensorArea: {
-      model: 'sensorArea',
+    idSensor: {
+      model: 'sensor',
       required:true
     },
   },

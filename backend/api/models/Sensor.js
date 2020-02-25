@@ -11,14 +11,21 @@ module.exports = {
     codigoInterno: {
       type: 'string'
     },
-    Nombre: {
+
+    nombre: {
       type: 'string'
     },
 
-    sensorAreaDelSensor:{
-      collection:'sensorArea', //nombre del modelo hijo
+    movimientosDelSensor:{
+      collection:'movimiento', //nombre del modelo hijo
       via: 'idSensor'  //nombre del campo foreing key en la tabala hijo
-    }
+    },
+
+    idArea: {
+      model: 'area',
+      required:true
+    },
+
 
   },
 };

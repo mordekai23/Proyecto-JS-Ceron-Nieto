@@ -18,8 +18,8 @@ module.exports = {
       type: 'string'
     },
 
-    pisosDelEdificio:{
-      collection:'piso', //nombre del modelo hijo
+    departamentoDelEdificio:{
+      collection:'departamento', //nombre del modelo hijo
       via: 'idEdificio'  //nombre del campo foreing key en la tabla hijo
     }
 

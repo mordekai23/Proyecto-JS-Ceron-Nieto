@@ -1,0 +1,26 @@
+<h1>Movimientos</h1>
+<br>
+<br>
+<p-table [value]="movimientosFiltrados()"
+         [paginator]="true"
+         [rows]="FILAS">
+  <ng-template pTemplate="caption">
+    Historial de movimientos
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Fecha</th>
+      <th>Sensor</th>
+      <th>Estado Notificación</th>
+    </tr>
+
+  </ng-template>
+  <ng-template pTemplate="body" let-movimiento>
+    <tr>
+      <td>{{movimiento.fecha}}</td>
+      <td>{{movimiento.idSensor.nombre}}
+      <td> <mat-checkbox  checked="{{movimiento.estadoNotificacion}}" Disabled></mat-checkbox></td>
+    </tr>
+  </ng-template>
+</p-table>
+

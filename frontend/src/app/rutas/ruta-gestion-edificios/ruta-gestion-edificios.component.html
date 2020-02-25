@@ -1,22 +1,22 @@
-<p>ruta-administrar-pisos works!</p>
+<h1>Gestión de Edificios</h1>
 <span class="ui-float-label">
   <input id="float-input"
          type="text"
          size="30"
-         [(ngModel)]="busquedaArea"
+         [(ngModel)]="busquedaEdificio"
          pInputText>
   <label for="float-input">
     Buscar por nombre
   </label>
 </span>
 <br>
-<p-button label="Buscar" (click)="buscarAreaPorNombre()">
+<p-button label="Buscar" (click)="buscarEdificioPorNombre()">
 </p-button>
 <p-button label="Nuevo" (click)="guardar()" >
 </p-button>
 <br>
 <br>
-<p-table [value]="areasFiltrados()"
+<p-table [value]="edificiosFiltrados()"
          [paginator]="true"
          [rows]="FILAS">
   <ng-template pTemplate="caption">
@@ -25,7 +25,7 @@
   <ng-template pTemplate="header">
     <tr>
       <th>Nombre</th>
-      <th>Descripción</th>
+      <th>Ubicacion</th>
       <th>Estado</th>
       <th>Acciones</th>
     </tr>
@@ -40,26 +40,28 @@
       <th>
         <input type="text"
                pInputText
-               name="descripcion"
-               [(ngModel)]="descripcionFiltrado"/>
+               name="ubicacion"
+               [(ngModel)]="ubicacionFiltradp"/>
       </th>
       <th>
+
       </th>
       <th>
       </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-area>
+  <ng-template pTemplate="body" let-edificio>
     <tr>
-      <td>{{area.nombre}}</td>
-      <td>{{area.descripcion}}</td>
-      <td> <mat-checkbox  checked="{{area.estado}}" Disabled></mat-checkbox></td>
+      <td>{{edificio.nombre}}</td>
+      <td>{{edificio.ubicacion}}</td>
+     <td> <mat-checkbox  checked="{{edificio.estado}}" Disabled></mat-checkbox></td>
       <td>
-        <p-button label="EDITAR" (click)="editar(area)">
+        <p-button label="EDITAR" (click)="editar(edificio)">
         </p-button>
-        <p-button label="ELIMINAR" (click)="eliminar(area)">
+        <p-button label="ELIMINAR" (click)="eliminar(edificio)">
         </p-button>
       </td>
     </tr>
   </ng-template>
 </p-table>
+
