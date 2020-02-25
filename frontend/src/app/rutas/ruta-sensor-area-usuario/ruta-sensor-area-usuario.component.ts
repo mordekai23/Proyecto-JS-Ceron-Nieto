@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FILAS } from 'src/app/constantes/numero-filas-por-tablas';
 import {HttpClient} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
-import {EdificioRestService} from "../../services/rest/edificio-rest.service";
 import {AreaUsuarioRestService} from "../../services/rest/areaUsuario-rest.service";
-import {ModalEditarEdificioComponent} from "../../modales/modal-editar-edificio/modal-editar-edificio.component";
-import {ModalEditarDepartamentoComponent} from "../../modales/modal-editar-departamento/modal-editar-departamento.component";
+import {ModalEditarAreaUsuarioComponent} from "../../modales/modal-editar-area-usuario/modal-editar-area-usuario.component";
 
 @Component({
   selector: 'app-ruta-sensor-area-usuario',
@@ -13,46 +11,54 @@ import {ModalEditarDepartamentoComponent} from "../../modales/modal-editar-depar
   styleUrls: ['./ruta-sensor-area-usuario.component.scss']
 })
 export class RutaSensorAreaUsuarioComponent implements OnInit {
-  url='http://localhost:1337';
-  areasUsuarios=[];
+  url = 'http://localhost:1337';
+  areaUsuarios = [];
   FILAS = FILAS;
-  nombreFiltrado="";
-  ubicacionFiltradp="";
-  estadoFiltrado="";
-  busquedaEntidad ='';
+  nombreFiltrado = '';
+  apellidoFiltrado = '';
+  correoElectronicoFiltrado = '';
+  busquedaUsuario = '';
+  rolFiltrado = '';
+  idUsuario="";
+  usuarios=[];
+
   constructor(
     private readonly _httpClient: HttpClient,
-    private readonly  _matDialog:MatDialog,
-    private readonly  _areaUsuarioRestService: AreaUsuarioRestService,
-  ) { }
+    private readonly _matDialog: MatDialog,
+    private readonly _areaUsuarioRestService: AreaUsuarioRestService
+  ) {
+  }
 
   ngOnInit() {
-    const urlGestion = this.url + '/departamento';
-    const respuestaConsulta$ = this._httpClient.get(
-      urlGestion
+    const urlUsuarios = this.url + '/usuario';
+    // $ -> Observable
+    const usuarios$ = this._httpClient.get(
+      urlUsuarios
     );
-    respuestaConsulta$
+    usuarios$
       .subscribe(
-        (datos: any[]) => { // TRY
-          console.log('edificios: ', datos);
-          this.areasUsuarios = datos;
+        (usuarios: any[]) => { // TRY
+          console.log('Usuarios: ', usuarios);
+          this.usuarios = usuarios;
         },
         (error) => { // CATCH
           console.error({
             error: error,
-            mensaje: 'Error consultando datos'
+            mensaje: 'Error consultando usuarios'
           })
         }
       );
   }
 
-  guardar() {
-    console.log('guardando datos');
-    const matDialogRefModalEditar = this._matDialog
-      .open(ModalEditarDepartamentoComponent,
+  guardar(usuario) {
+    console.log('guardar area usuario');
+    this.idUsuario=usuario.id;
+    const matDialogRefModalEditarUsuario = this._matDialog
+      .open(
+        ModalEditarAreaUsuarioComponent,
         {width: '500px'}
       );
-    const respuestaDialogo$ = matDialogRefModalEditar
+    const respuestaDialogo$ = matDialogRefModalEditarUsuario
       .afterClosed();
 
     respuestaDialogo$
@@ -60,7 +66,7 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
         (datos) => { // try
           console.log('Datos respuesta guardar cerrar popup', datos);
           if (datos) {
-            this.guardarHTTP(datos);
+            this.guardarUsuarioHTTP(datos);
           } else {
             // undefined
           }
@@ -70,45 +76,58 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
         }
       );
   }
-  guardarHTTP(datos) {
-    const entidadGuardada$ = this._areaUsuarioRestService
-      .crear(datos);
-    entidadGuardada$
-      .subscribe(
-        (datoGuardado: any) => { // try
-          console.log(datoGuardado);
-          const indice = this.areasUsuarios
-            .findIndex(
-              (entidad) => {
-                return entidad.id === datoGuardado.id;
-              }
-            );
-          this.areasUsuarios.push(datoGuardado);
-        },
-        (error) => { // catch
-          console.error(error)
-        }
-      )
+
+  guardarUsuarioHTTP(datos) {
+    var areaUsuarioObjeto = {
+      idUsuario : "",
+      idArea: "",
+      enviarNotificacion : "S",
+      idDepartamento:0,
+      idEdificio:0,
+    };
+    console.log("datos e el http: ", datos);
+    for(let i=0;i < datos.listaAreaSelecionada.length ;i++) {
+      areaUsuarioObjeto.idUsuario=this.idUsuario;
+      areaUsuarioObjeto.idArea=datos.listaAreaSelecionada[i];
+      areaUsuarioObjeto.enviarNotificacion="S";
+      areaUsuarioObjeto.idEdificio =datos.idEdificio;
+      areaUsuarioObjeto.idDepartamento = datos.idDepartamento;
+      const usuarioGuardado$ = this._areaUsuarioRestService.crear(areaUsuarioObjeto);
+      usuarioGuardado$
+        .subscribe(
+          (usuarioGuardado: any) => {
+            console.log(usuarioGuardado);
+            this.areaUsuarios.push(usuarioGuardado);
+            console.log("usuariosareas: ", this.areaUsuarios);
+          },
+          (error) => { // catch
+            console.error(error)
+          }
+        )
+    }
   }
-  editar(entidad) {
-    console.log('Editando entidad', entidad);
-    const matDialogRefModalEditar = this._matDialog
+
+  editar(usuario) {
+
+    console.log('Editando usuario', usuario);
+    console.log('lista area usuario', this.areaUsuarios);
+
+    const matDialogRefModalEditarUsuario = this._matDialog
       .open(
-        ModalEditarDepartamentoComponent,
-        {width: '500px', data: {edificio: entidad}}
+        ModalEditarAreaUsuarioComponent, //data: {usuario}
+        {width: '500px', data: {usuario: usuario}}
       );
-    const respuestaDialogo$ = matDialogRefModalEditar
+    const respuestaDialogo$ = matDialogRefModalEditarUsuario
       .afterClosed();
 
     respuestaDialogo$
       .subscribe(
         (datos) => { // try
           console.log('Datos', datos);
+          console.log('usuario', usuario);
           if (datos) {
-            console.log('id: ',entidad.id);
-            this.editarHTTP(entidad.id, datos);
+            //this.editarUsuarioHTTP(usuario.id, datos);
           } else {
-            // undefined
           }
         },
         (error) => { // catch
@@ -116,78 +135,80 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
         }
       );
   }
-  editarHTTP(id: number, datos) {
-    const entidadEditada$ = this._areaUsuarioRestService.editar(id, datos);
-    entidadEditada$
-      .subscribe(
-        (datoEditada: any) => { // try
-          console.log('ediProf HTTP', datoEditada);
-          const indice = this.areasUsuarios
-            .findIndex(
-              (edificio) => {
-                return edificio.id === id;
-              }
-            );
-          this.areasUsuarios[indice].nombre = datos.nombre;
-          this.areasUsuarios[indice].ubicacion = datos.ubicacion;
-          this.areasUsuarios[indice].estado = datos.estado;
-        },
-        (error) => { // catch
-          console.error('error en el subscribe', error)
-        }
-      )
+
+  editarUsuarioHTTP(id: number, datos) {
+    var areaUsuarioObjeto = {
+      idUsuario : "",
+      idArea: "",
+      enviarNotificacion : "S",
+      idDepartamento:0,
+      idEdificio:0,
+    };
+    console.log("datos e el http: ", datos);
+    for(let i=0;i < datos.listaAreaSelecionada.length ;i++) {
+      areaUsuarioObjeto.idUsuario = this.idUsuario;
+      areaUsuarioObjeto.idArea = datos.listaAreaSelecionada[i];
+      areaUsuarioObjeto.enviarNotificacion = "S";
+      areaUsuarioObjeto.idEdificio = datos.idEdificio;
+      areaUsuarioObjeto.idDepartamento = datos.idDepartamento;
+
+      const usuarioEditado$ = this._areaUsuarioRestService.editar(id, areaUsuarioObjeto);
+      usuarioEditado$
+        .subscribe(
+          (usuarioEditado: any) => { // try
+            console.log('usuario editado', usuarioEditado);
+            const indice = this.areaUsuarios
+              .findIndex(
+                (usuario) => {
+                  return usuario.id === id;
+                }
+              );
+            this.areaUsuarios[indice].nombre = datos.nombre;
+            this.areaUsuarios[indice].apellido = datos.apellido;
+            this.areaUsuarios[indice].correoElectronico = datos.correoElectronico;
+            this.areaUsuarios[indice].password = datos.password;
+            this.areaUsuarios[indice].rol = datos.rol;
+
+          },
+          (error) => { // catch
+            console.error(error)
+          }
+        )
+    }
   }
-  eliminar(entidad) {
-    console.log('Eliminando entidad', entidad);
-
-    const eliminar$ = this._areaUsuarioRestService
-      .eliminar(entidad.id);
-
-    eliminar$
-      .subscribe( entidadEliminada=> {
-          console.log('edificio eliminado',entidadEliminada);
-          const indice = this.areasUsuarios
-            .findIndex(
-              (entidadBuscada) => {
-                return entidadBuscada.id === entidad.id;
-              }
-            );
-          this.areasUsuarios.splice(indice, 1);
-
-        },
-        (error) => {
-          console.error(error);
-        }
-      )
-  }
-  buscarEdificioPorNombre()
-  {
+  buscarUsuarioPorNombre() {
     const busqueda$ = this._areaUsuarioRestService
-      .buscar(this.busquedaEntidad);
+      .buscar(this.busquedaUsuario);
     busqueda$
-      .subscribe( datos=> {
-          this.areasUsuarios = datos;
+      .subscribe(usuarios => {
+          this.areaUsuarios = usuarios;
         },
         (error) => {
           console.error(error);
         }
       )
   }
-  edificiosFiltrados() {
-    return this.areasUsuarios
+  usuariosFiltrados() {
+    return this.usuarios
       .filter(
-        (edificio) => {
-          return edificio.nombre.toLowerCase().includes(this.nombreFiltrado.toLowerCase());
+        (usuario) => {
+          return usuario.nombre.toLowerCase().includes(this.nombreFiltrado.toLowerCase());
         }
       )
       .filter(
-        (edificio) => {
-          return edificio.ubicacion.toLowerCase().includes(this.ubicacionFiltradp.toLowerCase());
+        (usuario) => {
+          return usuario.apellido.toLowerCase().includes(this.apellidoFiltrado.toLowerCase());
         }
       )
-
-      ;
+      .filter(
+        (usuario) => {
+          return usuario.correoElectronico.toLowerCase().includes(this.correoElectronicoFiltrado.toLowerCase());
+        }
+      )
+      .filter(
+        (usuario) => {
+          return usuario.rol.toLowerCase().includes(this.rolFiltrado.toLowerCase());
+        }
+      );
   }
-
 }
-

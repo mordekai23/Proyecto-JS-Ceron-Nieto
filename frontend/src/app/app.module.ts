@@ -35,6 +35,12 @@ import {DepartamentoRestService} from "./services/rest/departamento-rest.service
 import {SensorRestService} from "./services/rest/sensor_rest.service";
 import {AreaUsuarioRestService} from "./services/rest/areaUsuario-rest.service";
 import {UsuarioRestService} from "./services/rest/usuario_rest.service";
+import {PickListModule} from 'primeng/picklist';
+import {MatListModule} from "@angular/material/list";
+import { ModalEditarAreaUsuarioComponent } from './modales/modal-editar-area-usuario/modal-editar-area-usuario.component';
+import { RutaActivarNotificacionComponent } from './rutas/ruta-activar-notificacion/ruta-activar-notificacion.component';
+import { RutaRecibirNotificacionComponent } from './rutas/ruta-recibir-notificacion/ruta-recibir-notificacion.component';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
 
 @NgModule({
   declarations: [
@@ -53,6 +59,10 @@ import {UsuarioRestService} from "./services/rest/usuario_rest.service";
     RutaInicioComponent,
     ModalEditarSensorComponent,
     RutaGestionSensoresComponent,
+    ModalEditarAreaUsuarioComponent,
+    RutaActivarNotificacionComponent,
+    RutaRecibirNotificacionComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -68,6 +78,10 @@ import {UsuarioRestService} from "./services/rest/usuario_rest.service";
     ButtonModule,
     TableModule,
     HttpClientModule,
+    PickListModule,
+    MatListModule,
+    MatSlideToggleModule,
+
   ],
   entryComponents: [
     ModalEditarEdificioComponent,
@@ -76,7 +90,7 @@ import {UsuarioRestService} from "./services/rest/usuario_rest.service";
     ModalEditarUsuarioComponent,
     ModalEditarSensorComponent,
     ModalEditarUsuarioComponent,
-
+    ModalEditarAreaUsuarioComponent,
   ],
 
   providers: [
@@ -88,6 +102,7 @@ import {UsuarioRestService} from "./services/rest/usuario_rest.service";
     AreaUsuarioRestService,
     UsuarioRestService,
     AuthServices,
+
   ],
   bootstrap: [AppComponent]
 })

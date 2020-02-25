@@ -26,7 +26,6 @@ export class ModalEditarSensorComponent implements OnInit {
 
   ngOnInit() {
     //consultar los edificios
-    //consultar los edificios
     const urlEdificio = this.url + '/edificio';
     const edificios$ = this._httpClient.get(urlEdificio);
     edificios$
@@ -44,22 +43,11 @@ export class ModalEditarSensorComponent implements OnInit {
         }
       );
 
-
-
-
-
-
-
     console.log('datos en modal', this.data);
     if (this.data != null) {
       this.nombre = this.data.sensor.nombre;
       this.codigoInterno = this.data.sensor.codigoInterno;
      this.idEdificio= this.data.sensor.idEdificio;
-
-      //this.idDepartamento= this.data.sensor.idDepartamento;
-
-      //this.idArea= this.data.sensor.idArea.id;
-
       this.consultarDepartamentosDelEdificio(this.idEdificio);
       if(this.data.sensor.idDepartamento.id === undefined)
       {

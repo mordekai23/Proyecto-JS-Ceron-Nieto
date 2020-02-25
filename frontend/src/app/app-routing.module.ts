@@ -10,6 +10,8 @@ import {RutaGestionarUsuariosComponent} from "./rutas/ruta-gestionar-usuarios/ru
 import {RutaGestionDepartamentosComponent} from "./rutas/ruta-gestion-departamentos/ruta-gestion-departamentos.component";
 import {RutaGestionSensoresComponent} from "./rutas/ruta-gestion-sensores/ruta-gestion-sensores.component";
 import {RutaSensorAreaUsuarioComponent} from "./rutas/ruta-sensor-area-usuario/ruta-sensor-area-usuario.component";
+import {RutaActivarNotificacionComponent} from "./rutas/ruta-activar-notificacion/ruta-activar-notificacion.component";
+import {RutaRecibirNotificacionComponent} from "./rutas/ruta-recibir-notificacion/ruta-recibir-notificacion.component";
 
 
 const routes: Routes = [
@@ -59,6 +61,16 @@ const routes: Routes = [
   {
     path:'inicio/gestion-movimiento',
     component :RutaGestionMovimientoComponent,
+    canActivate: [EstaLogeadoPolicy],
+  },
+  {
+    path:'inicio/activar-notificacion',
+    component :RutaActivarNotificacionComponent,
+    canActivate: [EstaLogeadoPolicy],
+  },
+  {
+    path:'inicio/consultar-notificacion',
+    component :RutaRecibirNotificacionComponent,
     canActivate: [EstaLogeadoPolicy],
   },
 ];

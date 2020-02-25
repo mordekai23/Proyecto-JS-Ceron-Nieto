@@ -29,7 +29,7 @@ module.exports = {
       via: 'idUsuario'  //nombre del campo foreing key en la tabla hijo
     },
 
-    areausuarioDelUsuario:{
+    areasUsuarioDelUsuario:{
       collection:'areaUsuario', //nombre del modelo hijo
       via: 'idUsuario'  //nombre del campo foreing key en la tabla hijo
     }

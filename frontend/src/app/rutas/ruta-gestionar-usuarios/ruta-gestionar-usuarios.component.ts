@@ -18,7 +18,6 @@ export class RutaGestionarUsuariosComponent implements OnInit {
   nombreFiltrado = '';
   apellidoFiltrado = '';
   correoElectronicoFiltrado = '';
-  passwordFiltrado = '';
   busquedaUsuario ='';
   rolFiltrado='';
 
