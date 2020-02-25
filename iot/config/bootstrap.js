@@ -61,17 +61,22 @@ module.exports.bootstrap =  function(done) {
     proximity.on("change", async () => {
       var sleep = require('sleep');
       const {centimeters, inches} = proximity;
-      console.log("Proximity: ");
-      console.log("  cm  : ", centimeters);
-      console.log("  in  : ", inches);
-      console.log("-----------------");
-      const respuestaServidor = await axios
-        .post('http://localhost:1337/MonitoreoMovimiento',
-          {
-            valor: centimeters
-          }
-        )
-      console.log('Respuesta del servidor', respuestaServidor)
+
+      if(centimeters < 200){
+        console.log("Proximity: ");
+        console.log("  cm  : ", centimeters);
+        console.log("  in  : ", inches);
+        console.log("-----------------");
+        const respuestaServidor = await axios
+          .post('http://localhost:1337/MonitoreoMovimiento',
+            {
+              valor: centimeters
+            }
+          );
+        console.log('Respuesta del servidor', respuestaServidor)
+      }
+
+      //
           sleep.msleep(100);
     });
     done();
