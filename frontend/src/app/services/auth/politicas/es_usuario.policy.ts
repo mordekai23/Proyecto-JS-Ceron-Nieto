@@ -16,13 +16,14 @@ export class  EsUsuarioPolicy implements CanActivate{
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean
     {
-      if(this._authService.sesion.rol.toLowerCase() ==='administrador')
+      console.log('rol,',this._authService.sesion.rol.toLowerCase());
+      if(this._authService.sesion.rol.toLowerCase() === 'usuario')
       {
-        console.log('No tiene permiso');
-        this.router.navigate(['/inicio']);
         return true;
       }
       else {
+        console.log('No tiene permiso');
+        this.router.navigate(['/inicio']);
         return false;
       }
 

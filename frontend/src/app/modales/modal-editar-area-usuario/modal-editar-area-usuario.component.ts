@@ -42,14 +42,14 @@ export class ModalEditarAreaUsuarioComponent implements OnInit {
       );
 
     console.log('datos en modal', this.data);
-    console.log('areasUsuarioDelUsuario: ', this.data.usuario.areasUsuarioDelUsuario)
+    //console.log('areasUsuarioDelUsuario: ', this.data.usuario.areasUsuarioDelUsuario)
     if (this.data != null) {
       this.idEdificio= this.data.usuario.areasUsuarioDelUsuario[0].idEdificio;
       this.consultarDepartamentosDelEdificio(this.idEdificio);
       this.idDepartamento=this.data.usuario.areasUsuarioDelUsuario[0].idDepartamento;
       this.consultarAreaDelDepartamento(this.idDepartamento);
       this.listaAreaSelecionada = this.data.usuario.areasUsuarioDelUsuario;
-console.log('siii listaS',this.listaAreaSelecionada );
+      console.log('siii listaS',this.listaAreaSelecionada );
       if(this.listaAreaSelecionada ! == undefined)
       {
         for(let i=0; i<=this.listaAreaSelecionada.length; i++)
@@ -58,8 +58,6 @@ console.log('siii listaS',this.listaAreaSelecionada );
 
             this.listaAreaSelecionada[i].seleccionada=true;
         }
-
-
       }
 
     }
