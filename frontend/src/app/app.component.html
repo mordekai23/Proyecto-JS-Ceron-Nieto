@@ -304,7 +304,10 @@
     <button mat-menu-item [routerLink]="['inicio/activar-notificacion']" *ngIf="_authService.sesion.rol.toLowerCase() === 'usuario'">Activar Notificaciones</button>
     <button mat-menu-item [routerLink]="['inicio/consultar-notificacion']" *ngIf="_authService.sesion.rol.toLowerCase() === 'usuario'">Recibir Notificaciones</button>
   </mat-menu>
-
+  <button mat-button [matMenuTriggerFor]="belowMenu4" *ngIf="_authService.sesion.rol.toLowerCase() === 'administrador'">Historico</button>
+  <mat-menu #belowMenu4="matMenu" yPosition="below">
+    <button mat-menu-item [routerLink]="['inicio/gestion-movimiento']">Historial de Movimientos</button>
+  </mat-menu>
   <button mat-button [matMenuTriggerFor]="belowMenu3">Seguridad</button>
   <mat-menu #belowMenu3="matMenu" yPosition="below">
     <button mat-menu-item [routerLink]="['inicio/gestion-usuarios']">Gestión de usuarios</button>
