@@ -75,21 +75,6 @@ const routes: Routes = [
     component :RutaRecibirNotificacionComponent,
     canActivate: [EstaLogeadoPolicy,EsUsuarioPolicy],
   },
-  {
-    path:'inicio/administrar-sensores',
-    component :RutaAdministrarSensoresComponent,
-    canActivate: [EstaLogeadoPolicy],
-  },
-  {
-    path:'inicio/sensor-area-usuario',
-    component :RutaSensorAreaUsuarioComponent,
-    canActivate: [EstaLogeadoPolicy],
-  },
-  {
-    path:'inicio/gestionar-usuarios',
-    component :RutaGestionarUsuariosComponent,
-    canActivate: [EstaLogeadoPolicy],
-  },
 ];
 
 @NgModule({

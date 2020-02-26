@@ -41,5 +41,6 @@ export class ModalEditarUsuarioComponent implements OnInit {
       password:this.password,
       rol:this.rol,
     })
+
   }
 }

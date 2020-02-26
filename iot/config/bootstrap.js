@@ -8,77 +8,53 @@
  * For more information on seeding your app with fake data, check out:
  * https://sailsjs.com/config/bootstrap
  */
-/*const axios = require('axios');
-const moduloArduino = {
-  movimiento: function () {
-    var motion = new sails.config.johnny.five.Motion({
-      pin: 7
-    });
-
-    motion.on("calibrated", function() {
-      //console.log("calibrated");
-    });
-
-    /!*motion.on("motionstart", function() {
-      console.log("motionstart");
-    });*!/
-    return motion.detectedMotion
+const arduino = require('arduino-node');
+const arduLatest = arduino({path: 'bin'});
+arduLatest.run(['--verify', './arduino/sketch_feb17a.ino'], (err, out) => {
+  if (err) {
+    console.log(err);
+    return;
   }
-};*/
-/*var five = require('johnny-five');
-var board = new  five.Board({
-  port: 'COM5'
-});*/
-/*board.on("ready", function () {
-  var proximity =  five.Proximity({controller: 'HCSR04', pin: 7});
+  console.log(out.stdout);
+});
 
-  proximity.on("change", () => {
-    const {centimeters, inches} = proximity;
-    console.log("Proximity: ");
-    console.log("  cm  : ", centimeters);
-    console.log("  in  : ", inches);
-    console.log("-----------------");
-  });
-});*/
-//var sk = sails.config.johnny.five.Proximity({controller: 'HCSR04', pin: 7});
-/*const move = {
-  movidito: function () {
-    var proximity = five.Proximity({controller: 'HCSR04', pin: 7});
-    return proximity.centimeters;
+const ardu180 = arduino({path: 'bin', version: '1.8.0'});
+
+ardu180.run(['--verify', './arduino/sketch_feb17a.ino'], (err, out) => {
+  if (err) {
+    console.log(err);
+    return;
   }
-};*/
-const axios = require('axios');
-module.exports.bootstrap =  function(done) {
+  console.log(out.stdout);
+});
 
-  sails.config.johnny.board.on("ready", function () {
 
-    var proximity = new sails.config.johnny.five.Proximity({controller: 'HCSR04', pin: 7});
-    setInterval(
-      () => {
+module.exports.bootstrap = async function() {
 
-      }
-    )
-    proximity.on("change", async () => {
-      var sleep = require('sleep');
-      const {centimeters, inches} = proximity;
 
-      if(centimeters < 200){
-        console.log("Proximity: ");
-        console.log("  cm  : ", centimeters);
-        console.log("  in  : ", inches);
-        console.log("-----------------");
-        const respuestaServidor = await axios
-          .post('http://localhost:1337/MonitoreoMovimiento',
-            {
-              valor: centimeters
-            }
-          );
-        console.log('Respuesta del servidor', respuestaServidor)
-      }
+  setInterval(
+    ()=>{
+      const valor = ardu180;
+      console.log('asd11111')
+    },
+    timeout: 2000
+  )
+  console.log('asdas')
 
-      //
-          sleep.msleep(100);
-    });
-    done();
-  });
+  // By convention, this is a good place to set up fake data during development.
+  //
+  // For example:
+  // ```
+  // // Set up fake development data (or if we already have some, avast)
+  // if (await User.count() > 0) {
+  //   return;
+  // }
+  //
+  // await User.createEach([
+  //   { emailAddress: 'ry@example.com', fullName: 'Ryan Dahl', },
+  //   { emailAddress: 'rachael@example.com', fullName: 'Rachael Shaw', },
+  //   // etc.
+  // ]);
+  // ```
+
 };
