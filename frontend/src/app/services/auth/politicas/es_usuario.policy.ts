@@ -16,8 +16,7 @@ export class  EsUsuarioPolicy implements CanActivate{
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean
     {
-      console.log('rol,',this._authService.sesion.rol.toLowerCase());
-      if(this._authService.sesion.rol.toLowerCase() === 'usuario')
+      if(this._authService.sesion.rol.toLowerCase() ==='usuario')
       {
         return true;
       }

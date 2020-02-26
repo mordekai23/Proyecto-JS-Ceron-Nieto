@@ -24,14 +24,12 @@
   </ng-template>
   <ng-template pTemplate="header">
     <tr>
-      <th>Departamento</th>
       <th>Nombre</th>
       <th>Descripción</th>
       <th>Estado</th>
       <th>Acciones</th>
     </tr>
     <tr>
-      <th></th>
       <th>
         <input type="text"
                pInputText
@@ -53,7 +51,6 @@
   </ng-template>
   <ng-template pTemplate="body" let-area>
     <tr>
-      <td>{{area.idDepartamento.descripcion}}</td>
       <td>{{area.nombre}}</td>
       <td>{{area.descripcion}}</td>
       <td> <mat-checkbox  checked="{{area.estado}}" Disabled></mat-checkbox></td>

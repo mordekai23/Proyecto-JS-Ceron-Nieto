@@ -13,18 +13,18 @@ export class  EsAdministradorPolicy implements CanActivate{
     private router:Router,
   )
   {}
-//route: ActivatedRouteSnapshot, state: RouterStateSnapshot
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean
   {
-    console.log('rol,',this._authService.sesion.rol.toLowerCase());
-    if(this._authService.sesion.rol.toLowerCase() === 'administrador')
+    if(this._authService.sesion.rol.toLowerCase() ==='administrador')
     {
+
       return true;
     }
   else {
       console.log('No tiene permiso');
       this.router.navigate(['/inicio']);
-      return false;
+    return false;
   }
   }
 

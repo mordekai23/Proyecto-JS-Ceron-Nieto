@@ -89,7 +89,7 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
     for(let i=0;i < datos.listaAreaSelecionada.length ;i++) {
       areaUsuarioObjeto.idUsuario=this.idUsuario;
       areaUsuarioObjeto.idArea=datos.listaAreaSelecionada[i];
-      areaUsuarioObjeto.enviarNotificacion="AC";
+      areaUsuarioObjeto.enviarNotificacion="S";
       areaUsuarioObjeto.idEdificio =datos.idEdificio;
       areaUsuarioObjeto.idDepartamento = datos.idDepartamento;
       const usuarioGuardado$ = this._areaUsuarioRestService.crear(areaUsuarioObjeto);
