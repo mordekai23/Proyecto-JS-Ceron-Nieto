@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b0c64d23-da33-4edc-8b4d-6017c30ed043" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/api/models/MonitoreoMovimiento.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/api/models/MonitoreoMovimiento.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/rutas/ruta-sensor-area-usuario/ruta-sensor-area-usuario.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/rutas/ruta-sensor-area-usuario/ruta-sensor-area-usuario.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iot/config/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/iot/config/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iot/config/johnny.js" beforeDir="false" afterPath="$PROJECT_DIR$/iot/config/johnny.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
