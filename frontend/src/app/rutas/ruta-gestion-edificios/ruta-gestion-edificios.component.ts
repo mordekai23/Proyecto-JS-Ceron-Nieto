@@ -43,7 +43,9 @@ busquedaEdificio ='';
           })
         }
       );
+
   }
+
   guardar() {
     console.log('guardando edificio');
     const matDialogRefModalEditarEdificio = this._matDialog
@@ -52,6 +54,7 @@ busquedaEdificio ='';
       );
     const respuestaDialogo$ = matDialogRefModalEditarEdificio
       .afterClosed();
+
     respuestaDialogo$
       .subscribe(
         (datos) => { // try

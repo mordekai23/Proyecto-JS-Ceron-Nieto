@@ -16,18 +16,16 @@ export class  EsAdministradorPolicy implements CanActivate{
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean
   {
+
     if(this._authService.sesion.rol.toLowerCase() ==='administrador')
     {
-
       return true;
     }
-  else {
+    else {
       console.log('No tiene permiso');
       this.router.navigate(['/inicio']);
-    return false;
+      return false;    
   }
-  }
-
-
+}
 
 }

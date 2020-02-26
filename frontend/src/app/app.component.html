@@ -291,7 +291,7 @@
 
 
   <span>          </span>
-  <button mat-button [matMenuTriggerFor]="belowMenu1" *ngIf="_authService.sesion.rol.toLowerCase() === 'administrador'">Administración</button>
+  <button mat-button [matMenuTriggerFor]="belowMenu1" >Administración</button>
   <mat-menu #belowMenu1="matMenu" yPosition="below">
     <button mat-menu-item [routerLink]="['inicio/gestion-edificios']">Edificios</button>
     <button mat-menu-item [routerLink]="['inicio/gestion-departamentos']">Departamentos</button>
@@ -302,11 +302,16 @@
 
   <button mat-button [matMenuTriggerFor]="belowMenu2">Asignación</button>
   <mat-menu #belowMenu2="matMenu" yPosition="below">
-    <button mat-menu-item [routerLink]="['inicio/gestion-area-usuario']" *ngIf="_authService.sesion.rol.toLowerCase() === 'administrador'">Areas a Usuarios</button>
-    <button mat-menu-item [routerLink]="['inicio/activar-notificacion']" *ngIf="_authService.sesion.rol.toLowerCase() === 'usuario'">Activar Notificaciones</button>
-    <button mat-menu-item [routerLink]="['inicio/consultar-notificacion']" *ngIf="_authService.sesion.rol.toLowerCase() === 'usuario'">Recibir Notificaciones</button>
+    <button mat-menu-item [routerLink]="['inicio/gestion-area-usuario']">Areas a Usuarios</button>
+    <button mat-menu-item [routerLink]="['inicio/activar-notificacion']">Activar Notificaciones</button>
+    <button mat-menu-item [routerLink]="['inicio/consultar-notificacion']">Recibir Notificaciones</button>
   </mat-menu>
 
+
+  <button mat-button [matMenuTriggerFor]="belowMenu4" *ngIf="_authService.sesion.rol.toLowerCase() === 'administrador'">Historico</button>
+  <mat-menu #belowMenu4="matMenu" yPosition="below">
+    <button mat-menu-item [routerLink]="['inicio/gestion-movimiento']">Historial de Movimientos</button>
+  </mat-menu>
 
   <button mat-button [matMenuTriggerFor]="belowMenu3">Seguridad</button>
   <mat-menu #belowMenu3="matMenu" yPosition="below">
@@ -316,10 +321,7 @@
   <div class="spacer"></div>
   <div class="right">
     <mat-label>{{_authService.sesion.correoElectronico}}</mat-label>
-    <span>             </span>
-    <button mat-mini-fab color="primary" id="salir" name="salir" (click)="salir()">Salir</button>
+    <button mat-button id="salir" name="salir" (click)="salir()">Salir</button>
   </div>
-</div>
-<div class="content" role="main">
 </div>
 <router-outlet></router-outlet>

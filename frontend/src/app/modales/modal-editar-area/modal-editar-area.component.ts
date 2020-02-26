@@ -47,22 +47,13 @@ export class ModalEditarAreaComponent implements OnInit {
     console.log('datos en modal', this.data);
 
     if (this.data != null) {
+
       this.nombre = this.data.area.nombre;
       this.descripcion = this.data.area.descripcion;
       this.estado = this.data.area.estado;
       this.idEdificio= this.data.area.idEdificio;
-
-      //this.idDepartamento= this.data.area.idDepartamento.id;
-
       this.consultarDepartamentosDelEdificio(this.idEdificio);
-      if(this.data.area.idDepartamento.id === undefined)
-      {
-        this.idDepartamento=this.data.area.idDepartamento;
-      }
-      else {
-        this.idDepartamento=this.data.area.idDepartamento.id;
-      }
-
+      this.idDepartamento= this.data.area.idDepartamento.id;
     }
   }
 

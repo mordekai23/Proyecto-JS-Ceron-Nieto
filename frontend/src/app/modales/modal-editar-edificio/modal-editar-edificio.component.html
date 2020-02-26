@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Edificio</h1>
 <div mat-dialog-content>
-  <form #formularioEditar="ngForm" style="height: 200px;">
+  <form #formularioEditar="ngForm">
     <mat-form-field class="example-full-width">
       <mat-label>Nombre</mat-label>
       <input matInput placeholder="Nombre" id="nombreId" type="text" name="nombre" [(ngModel)]="nombre"
@@ -17,6 +17,6 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button label="Cancelar" styleClass="ui-button-secondary" (click)="cancelar()">Cancelar</button>
-  <button mat-button label="Aceptar" [disabled]="formularioEditar.invalid" styleClass="ui-button-success" (click)="aceptar()">Aceptar</button>
+  <button mat-button label="Aceptar" styleClass="ui-button-success" (click)="aceptar()">Aceptar</button>
 </div>
 

@@ -16,22 +16,12 @@ module.exports = {
     idArea: {
       model: 'area',
       required: true
-
     },
 
     idUsuario: {
       model: 'usuario',
       required:true
     },
-
-    idEdificio:
-      {
-        type:"number"
-      },
-    idDepartamento:
-      {
-        type:"number"
-      }
 
   },
 

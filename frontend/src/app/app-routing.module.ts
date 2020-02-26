@@ -6,14 +6,9 @@ import {RutaGestionAreasComponent} from "./rutas/ruta-gestion-areas/ruta-gestion
 import {RutaGestionMovimientoComponent} from "./rutas/ruta-gestion-movimiento/ruta-gestion-movimiento.component";
 import {EstaLogeadoPolicy} from "./services/auth/politicas/esta_logeado.policy";
 import {RutaInicioComponent} from "./rutas/ruta-inicio/ruta-inicio.component";
-import {RutaGestionarUsuariosComponent} from "./rutas/ruta-gestionar-usuarios/ruta-gestionar-usuarios.component";
-import {RutaGestionDepartamentosComponent} from "./rutas/ruta-gestion-departamentos/ruta-gestion-departamentos.component";
-import {RutaGestionSensoresComponent} from "./rutas/ruta-gestion-sensores/ruta-gestion-sensores.component";
 import {RutaSensorAreaUsuarioComponent} from "./rutas/ruta-sensor-area-usuario/ruta-sensor-area-usuario.component";
-import {RutaActivarNotificacionComponent} from "./rutas/ruta-activar-notificacion/ruta-activar-notificacion.component";
-import {RutaRecibirNotificacionComponent} from "./rutas/ruta-recibir-notificacion/ruta-recibir-notificacion.component";
-import {EsAdministradorPolicy} from "./services/auth/politicas/es_administrador.policy";
-import {EsUsuarioPolicy} from "./services/auth/politicas/es_usuario.policy";
+import {RutaAdministrarSensoresComponent} from "./rutas/ruta-administrar-sensores/ruta-administrar-sensores.component";
+import {RutaGestionarUsuariosComponent} from "./rutas/ruta-gestionar-usuarios/ruta-gestionar-usuarios.component";
 
 
 const routes: Routes = [
@@ -31,49 +26,19 @@ const routes: Routes = [
     canActivate: [EstaLogeadoPolicy]
   },
   {
-    path:'inicio/gestion-usuarios',
-    component :RutaGestionarUsuariosComponent,
-    canActivate: [EstaLogeadoPolicy]
-  },
-  {
     path:'inicio/gestion-edificios',
     component :RutaGestionEdificiosComponent,
-    canActivate: [EstaLogeadoPolicy,EsAdministradorPolicy]
-  },
-  {
-    path:'inicio/gestion-departamentos',
-    component :RutaGestionDepartamentosComponent,
-    canActivate: [EstaLogeadoPolicy, EsAdministradorPolicy]
+    canActivate: [EstaLogeadoPolicy]
   },
   {
     path:'inicio/gestion-areas',
     component :RutaGestionAreasComponent,
-    canActivate: [EstaLogeadoPolicy,EsAdministradorPolicy],
-  },
-  {
-    path:'inicio/gestion-sensores',
-    component :RutaGestionSensoresComponent,
-    canActivate: [EstaLogeadoPolicy,EsAdministradorPolicy]
-  },
-  {
-    path:'inicio/gestion-area-usuario',
-    component :RutaSensorAreaUsuarioComponent,
-    canActivate: [EstaLogeadoPolicy,EsAdministradorPolicy]
+    canActivate: [EstaLogeadoPolicy],
   },
   {
     path:'inicio/gestion-movimiento',
     component :RutaGestionMovimientoComponent,
-    canActivate: [EstaLogeadoPolicy,EsAdministradorPolicy],
-  },
-  {
-    path:'inicio/activar-notificacion',
-    component :RutaActivarNotificacionComponent,
-    canActivate: [EstaLogeadoPolicy,EsUsuarioPolicy],
-  },
-  {
-    path:'inicio/consultar-notificacion',
-    component :RutaRecibirNotificacionComponent,
-    canActivate: [EstaLogeadoPolicy,EsUsuarioPolicy],
+    canActivate: [EstaLogeadoPolicy],
   },
 ];
 
