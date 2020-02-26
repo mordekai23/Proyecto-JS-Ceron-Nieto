@@ -6,6 +6,9 @@ import {RutaGestionAreasComponent} from "./rutas/ruta-gestion-areas/ruta-gestion
 import {RutaGestionMovimientoComponent} from "./rutas/ruta-gestion-movimiento/ruta-gestion-movimiento.component";
 import {EstaLogeadoPolicy} from "./services/auth/politicas/esta_logeado.policy";
 import {RutaInicioComponent} from "./rutas/ruta-inicio/ruta-inicio.component";
+import {RutaSensorAreaUsuarioComponent} from "./rutas/ruta-sensor-area-usuario/ruta-sensor-area-usuario.component";
+import {RutaAdministrarSensoresComponent} from "./rutas/ruta-administrar-sensores/ruta-administrar-sensores.component";
+import {RutaGestionarUsuariosComponent} from "./rutas/ruta-gestionar-usuarios/ruta-gestionar-usuarios.component";
 
 
 const routes: Routes = [
@@ -35,6 +38,21 @@ const routes: Routes = [
   {
     path:'inicio/gestion-movimiento',
     component :RutaGestionMovimientoComponent,
+    canActivate: [EstaLogeadoPolicy],
+  },
+  {
+    path:'inicio/administrar-sensores',
+    component :RutaAdministrarSensoresComponent,
+    canActivate: [EstaLogeadoPolicy],
+  },
+  {
+    path:'inicio/sensor-area-usuario',
+    component :RutaSensorAreaUsuarioComponent,
+    canActivate: [EstaLogeadoPolicy],
+  },
+  {
+    path:'inicio/gestionar-usuarios',
+    component :RutaGestionarUsuariosComponent,
     canActivate: [EstaLogeadoPolicy],
   },
 ];
