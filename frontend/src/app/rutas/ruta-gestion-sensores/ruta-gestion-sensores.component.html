@@ -1,4 +1,4 @@
-<h2>Gestión de Departamento</h2>
+<h2>Gestión de Sensores</h2>
 <span class="ui-float-label">
   <input id="float-input"
          type="text"
@@ -20,37 +20,31 @@
          [paginator]="true"
          [rows]="FILAS">
   <ng-template pTemplate="caption">
-    Lista de Departamentos
+    Lista de Sensores
   </ng-template>
   <ng-template pTemplate="header">
     <tr>
-      <th>Edificio</th>
-      <th>Numero de departamento</th>
-      <th>Descripcion</th>
-      <th>Estado</th>
+      <th>Código Interno</th>
+      <th>Nombre</th>
       <th>Acciones</th>
     </tr>
     <tr>
-      <th></th>
       <th></th>
       <th>
         <input type="text"
                pInputText
                name="ubicacion"
-               [(ngModel)]="descripcionFiltrado"/>
+               [(ngModel)]="nombreFiltrado"/>
       </th>
-      <th>
-      </th>
+
       <th>
       </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-entidad>
     <tr>
-      <td>{{entidad.idEdificio.nombre}}</td>
-      <td>{{entidad.numeroDeDepartamento}}</td>
-      <td>{{entidad.descripcion}}</td>
-      <td> <mat-checkbox  checked="{{entidad.estado}}" Disabled></mat-checkbox></td>
+      <td>{{entidad.codigoInterno}}</td>
+      <td>{{entidad.nombre}}</td>
       <td>
         <p-button label="EDITAR" (click)="editar(entidad)">
         </p-button>

@@ -1,1 +1,79 @@
-<p>ruta-sensor-area-usuario works!</p>
+<h2>Asignar areas</h2>
+<span class="ui-float-label">
+  <input id="float-input"
+         type="text"
+         size="30"
+         [(ngModel)]="busquedaUsuario"
+         pInputText>
+  <label for="float-input">
+    Buscar por nombre
+  </label>
+</span>
+<br>
+<p-button label="Buscar" (click)="buscarUsuarioPorNombre()">
+</p-button>
+<br>
+<br>
+<p-table [value]="usuariosFiltrados()"
+         [paginator]="true"
+         [rows]="FILAS">
+  <ng-template pTemplate="caption">
+    Lista de Usuarios
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Correo</th>
+      <th>Rol</th>
+      <th>Acciones</th>
+    </tr>
+    <tr>
+      <th>
+        <input type="text"
+               pInputText
+               name="nombre"
+               [(ngModel)]="nombreFiltrado"
+        />
+      </th>
+      <th>
+        <input type="text"
+               pInputText
+               name="apellido"
+               [(ngModel)]="apellidoFiltrado"/>
+      </th>
+      <th>
+        <input type="text"
+               pInputText
+               name="correo"
+               [(ngModel)]="correoElectronicoFiltrado"
+        />
+      </th>
+      <th>
+        <input type="text"
+               pInputText
+               name="rol"
+               [(ngModel)]="rolFiltrado"
+        />
+      </th>
+      <th>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-usuario>
+    <tr>
+      <td>{{usuario.nombre}}</td>
+      <td>{{usuario.apellido}}</td>
+      <td>{{usuario.correoElectronico}}</td>
+      <td>{{usuario.rol}}</td>
+      <td>
+        <p-button label="Asignar areas" (click)="guardar(usuario)">
+        </p-button>
+
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+
+

@@ -28,7 +28,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/frontend/src/app/rutas/ruta-recibir-notificacion" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -37,6 +37,15 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Users\Laura\Documents\GitHub\Proyecto-JS-Ceron-Nieto\frontend\node_modules\typescript\lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Laura\Documents\GitHub\Proyecto-JS-Ceron-Nieto\frontend\src\app\rutas\ruta-recibir-notificacion" />
+      <recent name="C:\Users\Laura\Documents\GitHub\Proyecto-JS-Ceron-Nieto\frontend\src\app\rutas\ruta-gestion-departamentos" />
+      <recent name="C:\Users\Laura\Documents\GitHub\Proyecto-JS-Ceron-Nieto\frontend\src\app\rutas\ruta-gestion-sensores" />
+      <recent name="C:\Users\Laura\Documents\GitHub\Proyecto-JS-Ceron-Nieto\frontend\src\app\modales\modal-editar-area-usuario" />
+      <recent name="C:\Users\Laura\Documents\GitHub\Proyecto-JS-Ceron-Nieto\frontend\src\app\services\rest" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -71,6 +80,8 @@
       <workItem from="1582323966744" duration="1850000" />
       <workItem from="1582382187747" duration="13909000" />
       <workItem from="1582693315661" duration="2718000" />
+      <workItem from="1582700296991" duration="2013000" />
+      <workItem from="1582702649854" duration="2797000" />
     </task>
     <servers />
   </component>
