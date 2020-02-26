@@ -62,7 +62,7 @@ module.exports.bootstrap =  function(done) {
       var sleep = require('sleep');
       const {centimeters, inches} = proximity;
 
-      if(centimeters < 200){
+      if(centimeters < 20){
         console.log("Proximity: ");
         console.log("  cm  : ", centimeters);
         console.log("  in  : ", inches);
