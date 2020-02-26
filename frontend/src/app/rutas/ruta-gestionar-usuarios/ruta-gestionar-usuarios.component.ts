@@ -11,14 +11,6 @@ import {ModalEditarUsuarioComponent} from "../../modales/modal-editar-usuario/mo
   styleUrls: ['./ruta-gestionar-usuarios.component.scss']
 })
 export class RutaGestionarUsuariosComponent implements OnInit {
-  url='http://localhost:1337';
-  usuarios=[];
-  FILAS = FILAS;
-  nombreFiltrado="";
-  ubicacionFiltradp="";
-  estadoFiltrado="";
-  busquedaUsuario ='';
-
   url = 'http://localhost:1337';
   usuarios = [];
   FILAS = FILAS;
@@ -213,49 +205,4 @@ export class RutaGestionarUsuariosComponent implements OnInit {
   }
 
 
-    eliminar$
-      .subscribe( edificioEliminado=> {
-          console.log('edificio eliminado',edificioEliminado);
-          const indice = this.usuarios
-            .findIndex(
-              (edificioBuscado) => {
-                return edificioBuscado.id === edificio.id;
-              }
-            );
-          this.usuarios.splice(indice, 1);
-
-        },
-        (error) => {
-          console.error(error);
-        }
-      )
-  }
-  buscarUsuarioPorNombre()
-  {
-    const busqueda$ = this._usuarioRestService
-      .buscar(this.busquedaUsuario);
-    busqueda$
-      .subscribe( edificios=> {
-          this.usuarios = edificios;
-        },
-        (error) => {
-          console.error(error);
-        }
-      )
-  }
-  usuariosFiltrados() {
-    return this.usuarios
-      .filter(
-        (edificio) => {
-          return edificio.nombre.toLowerCase().includes(this.nombreFiltrado.toLowerCase());
-        }
-      )
-      .filter(
-        (edificio) => {
-          return edificio.ubicacion.toLowerCase().includes(this.ubicacionFiltradp.toLowerCase());
-        }
-      )
-
-      ;
-  }
 }
