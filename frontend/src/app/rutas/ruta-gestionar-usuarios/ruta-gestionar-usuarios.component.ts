@@ -15,7 +15,9 @@ export class RutaGestionarUsuariosComponent implements OnInit {
   usuarios=[];
   FILAS = FILAS;
   nombreFiltrado="";
-  ubicacionFiltradp="";
+  apellidoFiltrado="";
+  correoFiltrado="";
+  rolFiltrado="";
   estadoFiltrado="";
   busquedaUsuario ='';
 
@@ -60,7 +62,7 @@ export class RutaGestionarUsuariosComponent implements OnInit {
         (datos) => { // try
           console.log('Datos respuesta guardar cerrar popup', datos);
           if (datos) {
-            this.guardarEdificioHTTP(datos);
+            this.guardarUsuarioHTTP(datos);
           } else {
             // undefined
           }
@@ -70,20 +72,20 @@ export class RutaGestionarUsuariosComponent implements OnInit {
         }
       );
   }
-  guardarEdificioHTTP(datos) {
+  guardarUsuarioHTTP(datos) {
     const usuarioGuardado$ = this._usuarioRestService
       .crear(datos);
     usuarioGuardado$
       .subscribe(
-        (edificioGuardado: any) => { // try
-          console.log(edificioGuardado);
+        (usuarioGuardado: any) => { // try
+          console.log(usuarioGuardado);
           const indice = this.usuarios
             .findIndex(
-              (edificio) => {
-                return edificio.id === edificioGuardado.id;
+              (usuario) => {
+                return usuario.id === usuarioGuardado.id;
               }
             );
-          this.usuarios.push(edificioGuardado);
+          this.usuarios.push(usuarioGuardado);
         },
         (error) => { // catch
           console.error(error)
@@ -92,12 +94,12 @@ export class RutaGestionarUsuariosComponent implements OnInit {
   }
   editar(usuario) {
     console.log('Editando usuario', usuario);
-    const matDialogRefModalEditarEdificio = this._matDialog
+    const matDialogRefModalEditarUsuario = this._matDialog
       .open(
         ModalEditarUsuarioComponent,
-        {width: '500px', data: {edificio: usuario}}
+        {width: '500px', data: {usuario: usuario}}
       );
-    const respuestaDialogo$ = matDialogRefModalEditarEdificio
+    const respuestaDialogo$ = matDialogRefModalEditarUsuario
       .afterClosed();
 
     respuestaDialogo$
@@ -106,7 +108,7 @@ export class RutaGestionarUsuariosComponent implements OnInit {
           console.log('Datos', datos);
           if (datos) {
             console.log('id: ',usuario.id);
-            this.editarEdificioHTTP(usuario.id, datos);
+            this.editarUsuarioHTTP(usuario.id, datos);
           } else {
             // undefined
           }
@@ -116,40 +118,42 @@ export class RutaGestionarUsuariosComponent implements OnInit {
         }
       );
   }
-  editarEdificioHTTP(id: number, datos) {
-    const edificioEditado$ = this._usuarioRestService.editar(id, datos);
-    edificioEditado$
+  editarUsuarioHTTP(id: number, datos) {
+    const usuarioEditado$ = this._usuarioRestService.editar(id, datos);
+    usuarioEditado$
       .subscribe(
-        (edificioEditado: any) => { // try
-          console.log('ediProf HTTP', edificioEditado);
+        (usuarioEditado: any) => { // try
+          console.log('ediUsuario HTTP', usuarioEditado);
           const indice = this.usuarios
             .findIndex(
-              (edificio) => {
-                return edificio.id === id;
+              (usuario) => {
+                return usuario.id === id;
               }
             );
           this.usuarios[indice].nombre = datos.nombre;
-          this.usuarios[indice].ubicacion = datos.ubicacion;
+          this.usuarios[indice].apellido = datos.apellido;
+          this.usuarios[indice].correo = datos.correo;
           this.usuarios[indice].estado = datos.estado;
+          //this.usuarios[indice].rol = datos.rol;
         },
         (error) => { // catch
           console.error('error en el subscribe', error)
         }
       )
   }
-  eliminar(edificio) {
-    console.log('Eliminando edificio', edificio);
+  eliminar(usuario) {
+    console.log('Eliminando usuario', usuario);
 
     const eliminar$ = this._usuarioRestService
-      .eliminar(edificio.id);
+      .eliminar(usuario.id);
 
     eliminar$
-      .subscribe( edificioEliminado=> {
-          console.log('edificio eliminado',edificioEliminado);
+      .subscribe( usuarioEliminado=> {
+          console.log('usuario eliminado',usuarioEliminado);
           const indice = this.usuarios
             .findIndex(
-              (edificioBuscado) => {
-                return edificioBuscado.id === edificio.id;
+              (usuarioBuscado) => {
+                return usuarioBuscado.id === usuario.id;
               }
             );
           this.usuarios.splice(indice, 1);
@@ -165,8 +169,8 @@ export class RutaGestionarUsuariosComponent implements OnInit {
     const busqueda$ = this._usuarioRestService
       .buscar(this.busquedaUsuario);
     busqueda$
-      .subscribe( edificios=> {
-          this.usuarios = edificios;
+      .subscribe( usuarios=> {
+          this.usuarios = usuarios;
         },
         (error) => {
           console.error(error);
@@ -176,13 +180,23 @@ export class RutaGestionarUsuariosComponent implements OnInit {
   usuariosFiltrados() {
     return this.usuarios
       .filter(
-        (edificio) => {
-          return edificio.nombre.toLowerCase().includes(this.nombreFiltrado.toLowerCase());
+        (usuario) => {
+          return usuario.nombre.toLowerCase().includes(this.nombreFiltrado.toLowerCase());
         }
       )
       .filter(
-        (edificio) => {
-          return edificio.ubicacion.toLowerCase().includes(this.ubicacionFiltradp.toLowerCase());
+        (usuario) => {
+          return usuario.apellido.toLowerCase().includes(this.apellidoFiltrado.toLowerCase());
+        }
+      )
+      .filter(
+        (usuario) => {
+          return usuario.correo.toLowerCase().includes(this.correoFiltrado.toLowerCase());
+        }
+      )
+      .filter(
+        (usuario) => {
+          return usuario.estado.toLowerCase().includes(this.estadoFiltrado.toLowerCase());
         }
       )
 

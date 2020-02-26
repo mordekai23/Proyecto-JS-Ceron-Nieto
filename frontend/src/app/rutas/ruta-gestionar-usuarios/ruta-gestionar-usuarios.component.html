@@ -40,29 +40,31 @@
       <th>
         <input type="text"
                pInputText
+               name="rol"
+               [(ngModel)]="apellidoFiltrado"/>
+      </th>
+      <th>
+        <input type="text"
+               pInputText
                name="correo"
-               [(ngModel)]="ubicacionFiltradp"/>
+               [(ngModel)]="correoFiltrado"/>
       </th>
       <th>
         <input type="text"
                pInputText
                name="estado"
-               [(ngModel)]="ubicacionFiltradp"/>
+               [(ngModel)]="estadoFiltrado"/>
       </th>
-      <th>
-        <input type="text"
-               pInputText
-               name="rol"
-               [(ngModel)]="ubicacionFiltradp"/>
-      </th>
+
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-usuario>
     <tr>
       <td>{{usuario.nombre}}</td>
+      <td>{{usuario.apellido}}</td>
       <td>{{usuario.correo}}</td>
       <td>{{usuario.estado}}</td>
-      <td>{{usuario.rol}}</td>
+
       <td> <mat-checkbox  checked="{{usuario.estado}}" Disabled></mat-checkbox></td>
       <td>
         <p-button label="EDITAR" (click)="editar(usuario)">

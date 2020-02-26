@@ -8,22 +8,23 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 })
 export class ModalEditarUsuarioComponent implements OnInit {
   nombre="";
-  correo="";
-  estado="";
+  apellido="";
+  correoElectronico="";
+  password="";
   rol="";
-
   constructor(
-    public dialogRef:MatDialogRef<ModalEditarUsuarioComponent>,
+    public dialogRef: MatDialogRef<ModalEditarUsuarioComponent>,
     @Inject(MAT_DIALOG_DATA) public data:any,
   ) { }
 
   ngOnInit() {
     console.log('datos en modal', this.data);
     if (this.data != null) {
-      this.nombre = this.data.usuarios.nombre;
-      this.correo = this.data.usuarios.correo;
-      this.estado = this.data.usuarios.estado;
-      this.rol = this.data.usuarios.rol;
+      this.nombre = this.data.usuario.nombre;
+      this.apellido = this.data.usuario.apellido;
+      this.correoElectronico = this.data.usuario.correoElectronico;
+      this.password = this.data.usuario.password;
+      this.rol = this.data.usuario.rol;
     }
   }
   cancelar()
@@ -35,8 +36,11 @@ export class ModalEditarUsuarioComponent implements OnInit {
   {
     this.dialogRef.close({
       nombre:this.nombre,
-      correo:this.correo,
-      estado:this.estado,
-      rol:this.rol})
+      apellido:this.apellido,
+      correoElectronico:this.correoElectronico,
+      password:this.password,
+      rol:this.rol,
+    })
+
   }
 }

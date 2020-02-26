@@ -8,7 +8,10 @@
 module.exports = {
 
   attributes: {
-    nombreUsuario: {
+    nombre: {
+      type: 'string'
+    },
+    apellido: {
       type: 'string'
     },
     password: {
