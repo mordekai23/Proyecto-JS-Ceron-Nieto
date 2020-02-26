@@ -290,7 +290,7 @@
 <div class="toolbar" role="banner" *ngIf="_authService.estaLogeado">
 
   <span>          </span>
-  <button mat-button [matMenuTriggerFor]="belowMenu1" *ngIf="_authService.sesion.rol.toLowerCase() === 'administrador'">Administración</button>
+  <button mat-button [matMenuTriggerFor]="belowMenu1" >Administración</button>
   <mat-menu #belowMenu1="matMenu" yPosition="below">
     <button mat-menu-item [routerLink]="['inicio/gestion-edificios']">Edificios</button>
     <button mat-menu-item [routerLink]="['inicio/gestion-departamentos']">Departamentos</button>
@@ -300,10 +300,11 @@
 
   <button mat-button [matMenuTriggerFor]="belowMenu2">Asignación</button>
   <mat-menu #belowMenu2="matMenu" yPosition="below">
-    <button mat-menu-item [routerLink]="['inicio/gestion-area-usuario']" *ngIf="_authService.sesion.rol.toLowerCase() === 'administrador'">Areas a Usuarios</button>
-    <button mat-menu-item [routerLink]="['inicio/activar-notificacion']" *ngIf="_authService.sesion.rol.toLowerCase() === 'usuario'">Activar Notificaciones</button>
-    <button mat-menu-item [routerLink]="['inicio/consultar-notificacion']" *ngIf="_authService.sesion.rol.toLowerCase() === 'usuario'">Recibir Notificaciones</button>
+    <button mat-menu-item [routerLink]="['inicio/gestion-area-usuario']">Areas a Usuarios</button>
+    <button mat-menu-item [routerLink]="['inicio/activar-notificacion']">Activar Notificaciones</button>
+    <button mat-menu-item [routerLink]="['inicio/consultar-notificacion']">Recibir Notificaciones</button>
   </mat-menu>
+
   <button mat-button [matMenuTriggerFor]="belowMenu4" *ngIf="_authService.sesion.rol.toLowerCase() === 'administrador'">Historico</button>
   <mat-menu #belowMenu4="matMenu" yPosition="below">
     <button mat-menu-item [routerLink]="['inicio/gestion-movimiento']">Historial de Movimientos</button>
