@@ -10,8 +10,6 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-<<<<<<< HEAD
-=======
     const urlUsuarios = this.url + '/usuario';
     // $ -> Observable
     const usuarios$ = this._httpClient.get(
@@ -156,7 +154,7 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
           }
         )
     }
->>>>>>> parent of cebea6d... update- recibir notificacion- politicas
+
   }
 
 }
