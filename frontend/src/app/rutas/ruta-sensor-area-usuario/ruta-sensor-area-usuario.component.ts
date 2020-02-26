@@ -19,8 +19,8 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
   correoElectronicoFiltrado = '';
   busquedaUsuario = '';
   rolFiltrado = '';
-  idUsuario="";
-  usuarios=[];
+  idUsuario = "";
+  usuarios = [];
 
   constructor(
     private readonly _httpClient: HttpClient,
@@ -52,7 +52,7 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
 
   guardar(usuario) {
     console.log('guardar area usuario');
-    this.idUsuario=usuario.id;
+    this.idUsuario = usuario.id;
     const matDialogRefModalEditarUsuario = this._matDialog
       .open(
         ModalEditarAreaUsuarioComponent,
@@ -79,18 +79,18 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
 
   guardarUsuarioHTTP(datos) {
     var areaUsuarioObjeto = {
-      idUsuario : "",
+      idUsuario: "",
       idArea: "",
-      enviarNotificacion : "AC",
-      idDepartamento:0,
-      idEdificio:0,
+      enviarNotificacion: "AC",
+      idDepartamento: 0,
+      idEdificio: 0,
     };
     console.log("datos e el http: ", datos);
-    for(let i=0;i < datos.listaAreaSelecionada.length ;i++) {
-      areaUsuarioObjeto.idUsuario=this.idUsuario;
-      areaUsuarioObjeto.idArea=datos.listaAreaSelecionada[i];
-      areaUsuarioObjeto.enviarNotificacion="AC";
-      areaUsuarioObjeto.idEdificio =datos.idEdificio;
+    for (let i = 0; i < datos.listaAreaSelecionada.length; i++) {
+      areaUsuarioObjeto.idUsuario = this.idUsuario;
+      areaUsuarioObjeto.idArea = datos.listaAreaSelecionada[i];
+      areaUsuarioObjeto.enviarNotificacion = "AC";
+      areaUsuarioObjeto.idEdificio = datos.idEdificio;
       areaUsuarioObjeto.idDepartamento = datos.idDepartamento;
       const usuarioGuardado$ = this._areaUsuarioRestService.crear(areaUsuarioObjeto);
       usuarioGuardado$
@@ -135,16 +135,17 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
         }
       );
   }
+
   editarUsuarioHTTP(id: number, datos) {
     var areaUsuarioObjeto = {
-      idUsuario : "",
+      idUsuario: "",
       idArea: "",
-      enviarNotificacion : "S",
-      idDepartamento:0,
-      idEdificio:0,
+      enviarNotificacion: "S",
+      idDepartamento: 0,
+      idEdificio: 0,
     };
     console.log("datos e el http: ", datos);
-    for(let i=0;i < datos.listaAreaSelecionada.length ;i++) {
+    for (let i = 0; i < datos.listaAreaSelecionada.length; i++) {
       areaUsuarioObjeto.idUsuario = this.idUsuario;
       areaUsuarioObjeto.idArea = datos.listaAreaSelecionada[i];
       areaUsuarioObjeto.enviarNotificacion = "S";
@@ -176,39 +177,42 @@ export class RutaSensorAreaUsuarioComponent implements OnInit {
     }
   }
 
-  buscarUsuarioPorNombre() {
-    const busqueda$ = this._areaUsuarioRestService
-      .buscar(this.busquedaUsuario);
-    busqueda$
-      .subscribe(usuarios => {
-          this.areaUsuarios = usuarios;
-        },
-        (error) => {
-          console.error(error);
-        }
-      )
-  }
-  usuariosFiltrados() {
-    return this.usuarios
-      .filter(
-        (usuario) => {
-          return usuario.nombre.toLowerCase().includes(this.nombreFiltrado.toLowerCase());
-        }
-      )
-      .filter(
-        (usuario) => {
-          return usuario.apellido.toLowerCase().includes(this.apellidoFiltrado.toLowerCase());
-        }
-      )
-      .filter(
-        (usuario) => {
-          return usuario.correoElectronico.toLowerCase().includes(this.correoElectronicoFiltrado.toLowerCase());
-        }
-      )
-      .filter(
-        (usuario) => {
-          return usuario.rol.toLowerCase().includes(this.rolFiltrado.toLowerCase());
-        }
-      );
-  }
+    buscarUsuarioPorNombre()
+    {
+      const busqueda$ = this._areaUsuarioRestService
+        .buscar(this.busquedaUsuario);
+      busqueda$
+        .subscribe(usuarios => {
+            this.areaUsuarios = usuarios;
+          },
+          (error) => {
+            console.error(error);
+          }
+        )
+    }
+    usuariosFiltrados()
+    {
+      return this.usuarios
+        .filter(
+          (usuario) => {
+            return usuario.nombre.toLowerCase().includes(this.nombreFiltrado.toLowerCase());
+          }
+        )
+        .filter(
+          (usuario) => {
+            return usuario.apellido.toLowerCase().includes(this.apellidoFiltrado.toLowerCase());
+          }
+        )
+        .filter(
+          (usuario) => {
+            return usuario.correoElectronico.toLowerCase().includes(this.correoElectronicoFiltrado.toLowerCase());
+          }
+        )
+        .filter(
+          (usuario) => {
+            return usuario.rol.toLowerCase().includes(this.rolFiltrado.toLowerCase());
+          }
+        );
+    }
+
 }
