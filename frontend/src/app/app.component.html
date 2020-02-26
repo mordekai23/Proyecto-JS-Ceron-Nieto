@@ -289,6 +289,7 @@
 <!-- Toolbar -->
 <div class="toolbar" role="banner" *ngIf="_authService.estaLogeado">
 
+
   <span>          </span>
   <button mat-button [matMenuTriggerFor]="belowMenu1" *ngIf="_authService.sesion.rol.toLowerCase() === 'administrador'">Administración</button>
   <mat-menu #belowMenu1="matMenu" yPosition="below">
@@ -297,6 +298,7 @@
     <button mat-menu-item [routerLink]="['inicio/gestion-areas']">Areas</button>
     <button mat-menu-item [routerLink]="['inicio/gestion-sensores']">Sensores</button>
   </mat-menu>
+
 
   <button mat-button [matMenuTriggerFor]="belowMenu2">Asignación</button>
   <mat-menu #belowMenu2="matMenu" yPosition="below">
@@ -314,6 +316,7 @@
   <mat-menu #belowMenu3="matMenu" yPosition="below">
     <button mat-menu-item [routerLink]="['inicio/gestion-usuarios']">Gestión de usuarios</button>
   </mat-menu>
+
   <div class="spacer"></div>
   <div class="right">
     <mat-label>{{_authService.sesion.correoElectronico}}</mat-label>
