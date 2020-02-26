@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FILAS } from 'src/app/constantes/numero-filas-por-tablas';
 import {HttpClient} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
-import {UsuarioRestService} from "../../services/rest/usuario_rest.service";
+import {UsuarioRestService} from "../../services/rest/usuario-rest.service";
 import {ModalEditarUsuarioComponent} from "../../modales/modal-editar-usuario/modal-editar-usuario.component";
 
 @Component({
@@ -15,35 +15,27 @@ export class RutaGestionarUsuariosComponent implements OnInit {
   usuarios=[];
   FILAS = FILAS;
   nombreFiltrado="";
-  ubicacionFiltradp="";
+  apellidoFiltrado="";
+  correoFiltrado="";
+  rolFiltrado="";
   estadoFiltrado="";
   busquedaUsuario ='';
 
-  url = 'http://localhost:1337';
-  usuarios = [];
-  FILAS = FILAS;
-  nombreFiltrado = '';
-  apellidoFiltrado = '';
-  correoElectronicoFiltrado = '';
-  busquedaUsuario ='';
-  rolFiltrado='';
-
   constructor(
     private readonly _httpClient: HttpClient,
-    private readonly _matDialog: MatDialog,
-    private readonly _usuarioRestService: UsuarioRestService
+    private readonly  _matDialog:MatDialog,
+    private readonly  _usuarioRestService: UsuarioRestService,
   ) { }
 
   ngOnInit() {
-    const urlUsuarios = this.url + '/usuario';
-    // $ -> Observable
+    const urlUsuario = this.url + '/usuario';
     const usuarios$ = this._httpClient.get(
-      urlUsuarios
+      urlUsuario
     );
     usuarios$
       .subscribe(
         (usuarios: any[]) => { // TRY
-          console.log('Usuarios: ', usuarios);
+          console.log('usuarios: ', usuarios);
           this.usuarios = usuarios;
         },
         (error) => { // CATCH
@@ -53,13 +45,13 @@ export class RutaGestionarUsuariosComponent implements OnInit {
           })
         }
       );
+
   }
 
   guardar() {
     console.log('guardando usuario');
     const matDialogRefModalEditarUsuario = this._matDialog
-      .open(
-        ModalEditarUsuarioComponent,
+      .open(ModalEditarUsuarioComponent,
         {width: '500px'}
       );
     const respuestaDialogo$ = matDialogRefModalEditarUsuario
@@ -94,7 +86,6 @@ export class RutaGestionarUsuariosComponent implements OnInit {
               }
             );
           this.usuarios.push(usuarioGuardado);
-          //console.log('usuarios luego de guardar el ultimo dato',this.usuarios)
         },
         (error) => { // catch
           console.error(error)
@@ -106,7 +97,7 @@ export class RutaGestionarUsuariosComponent implements OnInit {
     const matDialogRefModalEditarUsuario = this._matDialog
       .open(
         ModalEditarUsuarioComponent,
-        {width: '500px', data: {usuario}}
+        {width: '500px', data: {usuario: usuario}}
       );
     const respuestaDialogo$ = matDialogRefModalEditarUsuario
       .afterClosed();
@@ -115,10 +106,11 @@ export class RutaGestionarUsuariosComponent implements OnInit {
       .subscribe(
         (datos) => { // try
           console.log('Datos', datos);
-          console.log('usuario', usuario);
           if (datos) {
+            console.log('id: ',usuario.id);
             this.editarUsuarioHTTP(usuario.id, datos);
           } else {
+            // undefined
           }
         },
         (error) => { // catch
@@ -131,7 +123,7 @@ export class RutaGestionarUsuariosComponent implements OnInit {
     usuarioEditado$
       .subscribe(
         (usuarioEditado: any) => { // try
-          console.log('usuario editado',usuarioEditado);
+          console.log('ediUsuario HTTP', usuarioEditado);
           const indice = this.usuarios
             .findIndex(
               (usuario) => {
@@ -140,13 +132,12 @@ export class RutaGestionarUsuariosComponent implements OnInit {
             );
           this.usuarios[indice].nombre = datos.nombre;
           this.usuarios[indice].apellido = datos.apellido;
-          this.usuarios[indice].correoElectronico = datos.correoElectronico;
-          this.usuarios[indice].password = datos.password;
-          this.usuarios[indice].rol = datos.rol;
-
+          this.usuarios[indice].correo = datos.correo;
+          this.usuarios[indice].estado = datos.estado;
+          //this.usuarios[indice].rol = datos.rol;
         },
         (error) => { // catch
-          console.error(error)
+          console.error('error en el subscribe', error)
         }
       )
   }
@@ -158,9 +149,7 @@ export class RutaGestionarUsuariosComponent implements OnInit {
 
     eliminar$
       .subscribe( usuarioEliminado=> {
-          console.log(usuarioEliminado);
-          //indice eliminar del frondend del arrays de usuarios
-          //eliminarlo del array usuarios.
+          console.log('usuario eliminado',usuarioEliminado);
           const indice = this.usuarios
             .findIndex(
               (usuarioBuscado) => {
@@ -202,57 +191,12 @@ export class RutaGestionarUsuariosComponent implements OnInit {
       )
       .filter(
         (usuario) => {
-          return usuario.correoElectronico.toLowerCase().includes(this.correoElectronicoFiltrado.toLowerCase());
+          return usuario.correo.toLowerCase().includes(this.correoFiltrado.toLowerCase());
         }
       )
       .filter(
         (usuario) => {
-          return usuario.rol.toLowerCase().includes(this.rolFiltrado.toLowerCase());
-        }
-      );
-  }
-
-
-    eliminar$
-      .subscribe( edificioEliminado=> {
-          console.log('edificio eliminado',edificioEliminado);
-          const indice = this.usuarios
-            .findIndex(
-              (edificioBuscado) => {
-                return edificioBuscado.id === edificio.id;
-              }
-            );
-          this.usuarios.splice(indice, 1);
-
-        },
-        (error) => {
-          console.error(error);
-        }
-      )
-  }
-  buscarUsuarioPorNombre()
-  {
-    const busqueda$ = this._usuarioRestService
-      .buscar(this.busquedaUsuario);
-    busqueda$
-      .subscribe( edificios=> {
-          this.usuarios = edificios;
-        },
-        (error) => {
-          console.error(error);
-        }
-      )
-  }
-  usuariosFiltrados() {
-    return this.usuarios
-      .filter(
-        (edificio) => {
-          return edificio.nombre.toLowerCase().includes(this.nombreFiltrado.toLowerCase());
-        }
-      )
-      .filter(
-        (edificio) => {
-          return edificio.ubicacion.toLowerCase().includes(this.ubicacionFiltradp.toLowerCase());
+          return usuario.estado.toLowerCase().includes(this.estadoFiltrado.toLowerCase());
         }
       )
 

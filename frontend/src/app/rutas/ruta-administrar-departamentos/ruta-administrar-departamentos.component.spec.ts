@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RutaGestionDepartamentosComponent } from './ruta-gestion-departamentos.component';
+import { RutaAdministrarDepartamentosComponent } from './ruta-administrar-departamentos.component';
 
 describe('RutaAdministrarDepartamentosComponent', () => {
-  let component: RutaGestionDepartamentosComponent;
-  let fixture: ComponentFixture<RutaGestionDepartamentosComponent>;
+  let component: RutaAdministrarDepartamentosComponent;
+  let fixture: ComponentFixture<RutaAdministrarDepartamentosComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RutaGestionDepartamentosComponent ]
+      declarations: [ RutaAdministrarDepartamentosComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RutaGestionDepartamentosComponent);
+    fixture = TestBed.createComponent(RutaAdministrarDepartamentosComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
