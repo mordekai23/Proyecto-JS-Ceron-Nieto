@@ -40,25 +40,12 @@ const routes: Routes = [
     component :RutaGestionMovimientoComponent,
     canActivate: [EstaLogeadoPolicy],
   },
-  {
-    path:'inicio/administrar-sensores',
-    component :RutaAdministrarSensoresComponent,
-    canActivate: [EstaLogeadoPolicy],
-  },
-  {
-    path:'inicio/sensor-area-usuario',
-    component :RutaSensorAreaUsuarioComponent,
-    canActivate: [EstaLogeadoPolicy],
-  },
-  {
-    path:'inicio/gestionar-usuarios',
-    component :RutaGestionarUsuariosComponent,
-    canActivate: [EstaLogeadoPolicy],
-  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+
+}

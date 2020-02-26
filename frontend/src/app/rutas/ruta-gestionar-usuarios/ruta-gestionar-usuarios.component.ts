@@ -11,6 +11,7 @@ import {ModalEditarUsuarioComponent} from "../../modales/modal-editar-usuario/mo
   styleUrls: ['./ruta-gestionar-usuarios.component.scss']
 })
 export class RutaGestionarUsuariosComponent implements OnInit {
+
   url='http://localhost:1337';
   usuarios=[];
   FILAS = FILAS;
@@ -196,10 +197,9 @@ export class RutaGestionarUsuariosComponent implements OnInit {
       )
       .filter(
         (usuario) => {
-          return usuario.estado.toLowerCase().includes(this.estadoFiltrado.toLowerCase());
+          return usuario.rol.toLowerCase().includes(this.rolFiltrado.toLowerCase());
         }
-      )
-
-      ;
+      );
   }
+
 }

@@ -1,1 +1,1 @@
-export const FILAS=3;
+export const FILAS=2
