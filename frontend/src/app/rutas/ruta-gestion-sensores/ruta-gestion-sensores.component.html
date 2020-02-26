@@ -1,9 +1,9 @@
-<h2>Gestión de Edificios</h2>
+<h2>Gestión de Sensores</h2>
 <span class="ui-float-label">
   <input id="float-input"
          type="text"
          size="30"
-         [(ngModel)]="busquedaEdificio"
+         [(ngModel)]="busquedaEntidad"
          pInputText>
   <label for="float-input">
     Buscar por nombre
@@ -20,45 +20,35 @@
          [paginator]="true"
          [rows]="FILAS">
   <ng-template pTemplate="caption">
-    Lista de Edificios
+    Lista de Sensores
   </ng-template>
   <ng-template pTemplate="header">
     <tr>
+      <th>Código Interno</th>
       <th>Nombre</th>
-      <th>Ubicacion</th>
-      <th>Estado</th>
       <th>Acciones</th>
     </tr>
     <tr>
-      <th>
-        <input type="text"
-               pInputText
-               name="nombre"
-               [(ngModel)]="nombreFiltrado"
-        />
-      </th>
+      <th></th>
       <th>
         <input type="text"
                pInputText
                name="ubicacion"
-               [(ngModel)]="ubicacionFiltradp"/>
+               [(ngModel)]="nombreFiltrado"/>
       </th>
-      <th>
 
-      </th>
       <th>
       </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-edificio>
+  <ng-template pTemplate="body" let-entidad>
     <tr>
-      <td>{{edificio.nombre}}</td>
-      <td>{{edificio.ubicacion}}</td>
-     <td> <mat-checkbox  checked="{{edificio.estado}}" Disabled></mat-checkbox></td>
+      <td>{{entidad.codigoInterno}}</td>
+      <td>{{entidad.nombre}}</td>
       <td>
-        <p-button label="EDITAR" (click)="editar(edificio)">
+        <p-button label="EDITAR" (click)="editar(entidad)">
         </p-button>
-        <p-button label="ELIMINAR" (click)="eliminar(edificio)">
+        <p-button label="ELIMINAR" (click)="eliminar(entidad)">
         </p-button>
       </td>
     </tr>

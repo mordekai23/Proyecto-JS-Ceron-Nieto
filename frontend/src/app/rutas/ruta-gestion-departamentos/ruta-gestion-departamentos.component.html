@@ -1,48 +1,42 @@
-<h2>Gestión de Areas</h2>
+<h2>Gestión de Departamento</h2>
 <span class="ui-float-label">
   <input id="float-input"
          type="text"
          size="30"
-         [(ngModel)]="busquedaArea"
+         [(ngModel)]="busquedaEntidad"
          pInputText>
   <label for="float-input">
     Buscar por nombre
   </label>
 </span>
 <br>
-<p-button label="Buscar" (click)="buscarAreaPorNombre()">
+<p-button label="Buscar" (click)="buscarEdificioPorNombre()">
 </p-button>
 <p-button label="Nuevo" (click)="guardar()" >
 </p-button>
 <br>
 <br>
-<p-table [value]="areasFiltrados()"
+<p-table [value]="edificiosFiltrados()"
          [paginator]="true"
          [rows]="FILAS">
   <ng-template pTemplate="caption">
-    Lista de Profesores
+    Lista de Departamentos
   </ng-template>
   <ng-template pTemplate="header">
     <tr>
-      <th>Departamento</th>
-      <th>Nombre</th>
-      <th>Descripción</th>
+      <th>Edificio</th>
+      <th>Numero de departamento</th>
+      <th>Descripcion</th>
       <th>Estado</th>
       <th>Acciones</th>
     </tr>
     <tr>
       <th></th>
+      <th></th>
       <th>
         <input type="text"
                pInputText
-               name="nombre"
-               [(ngModel)]="nombreFiltrado"
-        />
-      </th>
-      <th>
-        <input type="text"
-               pInputText
-               name="descripcion"
+               name="ubicacion"
                [(ngModel)]="descripcionFiltrado"/>
       </th>
       <th>
@@ -51,16 +45,16 @@
       </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-area>
+  <ng-template pTemplate="body" let-entidad>
     <tr>
-      <td>{{area.idDepartamento.descripcion}}</td>
-      <td>{{area.nombre}}</td>
-      <td>{{area.descripcion}}</td>
-      <td> <mat-checkbox  checked="{{area.estado}}" Disabled></mat-checkbox></td>
+      <td>{{entidad.idEdificio.nombre}}</td>
+      <td>{{entidad.numeroDeDepartamento}}</td>
+      <td>{{entidad.descripcion}}</td>
+      <td> <mat-checkbox  checked="{{entidad.estado}}" Disabled></mat-checkbox></td>
       <td>
-        <p-button label="EDITAR" (click)="editar(area)">
+        <p-button label="EDITAR" (click)="editar(entidad)">
         </p-button>
-        <p-button label="ELIMINAR" (click)="eliminar(area)">
+        <p-button label="ELIMINAR" (click)="eliminar(entidad)">
         </p-button>
       </td>
     </tr>

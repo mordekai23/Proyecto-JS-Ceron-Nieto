@@ -3,29 +3,28 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
-  selector: 'app-modal-editar-area',
-  templateUrl: './modal-editar-area.component.html',
-  styleUrls: ['./modal-editar-area.component.scss']
+  selector: 'app-modal-editar-sensor',
+  templateUrl: './modal-editar-sensor.component.html',
+  styleUrls: ['./modal-editar-sensor.component.scss']
 })
-export class ModalEditarAreaComponent implements OnInit {
+export class ModalEditarSensorComponent implements OnInit {
   nombre="";
-  descripcion="";
-  estado="";
-  idDepartamento="";
+  codigoInterno="";
+  idArea="";
   url = 'http://localhost:1337';
-  departamentos=[];
-  idEdificio="";
   edificios=[];
-  sensores=[];
+  departamentos=[];
+  areas=[];
 
+  idEdificio="";
+  idDepartamento="";
   constructor(
-    public dialogRef:MatDialogRef<ModalEditarAreaComponent>,
+    public dialogRef:MatDialogRef<ModalEditarSensorComponent>,
     private readonly _httpClient: HttpClient,
     @Inject(MAT_DIALOG_DATA) public data:any,
   ) { }
 
   ngOnInit() {
-
     //consultar los edificios
     const urlEdificio = this.url + '/edificio';
     const edificios$ = this._httpClient.get(urlEdificio);
@@ -45,27 +44,29 @@ export class ModalEditarAreaComponent implements OnInit {
       );
 
     console.log('datos en modal', this.data);
-
     if (this.data != null) {
-      this.nombre = this.data.area.nombre;
-      this.descripcion = this.data.area.descripcion;
-      this.estado = this.data.area.estado;
-      this.idEdificio= this.data.area.idEdificio;
-
-      //this.idDepartamento= this.data.area.idDepartamento.id;
-
+      this.nombre = this.data.sensor.nombre;
+      this.codigoInterno = this.data.sensor.codigoInterno;
+     this.idEdificio= this.data.sensor.idEdificio;
       this.consultarDepartamentosDelEdificio(this.idEdificio);
-      if(this.data.area.idDepartamento.id === undefined)
+      if(this.data.sensor.idDepartamento.id === undefined)
       {
-        this.idDepartamento=this.data.area.idDepartamento;
+        this.idDepartamento=this.data.sensor.idDepartamento;
       }
       else {
-        this.idDepartamento=this.data.area.idDepartamento.id;
+        this.idDepartamento=this.data.sensor.idDepartamento.id;
+      }
+      this.consultarAreaDelDepartamento(this.idDepartamento);
+      if(this.data.sensor.idArea.id === undefined)
+      {
+        this.idArea=this.data.sensor.idArea;
+      }
+      else {
+        this.idArea=this.data.sensor.idArea.id;
       }
 
     }
   }
-
 
   consultarDepartamentosDelEdificio(evento)
   {
@@ -92,26 +93,32 @@ export class ModalEditarAreaComponent implements OnInit {
 
   }
 
-  consultarSensores()
+
+  consultarAreaDelDepartamento(evento)
   {
-    const urlSensor = this.url + '/sensor';
-    console.log('url: ', urlSensor);
-    const sensores$ = this._httpClient.get(urlSensor);
-    sensores$
+    const dato= evento;
+    console.log('dato: ', dato);
+    const urlArea = this.url + '/area?idDepartamento='+dato;
+    console.log('url: ', urlArea);
+    const areass$ = this._httpClient.get(urlArea);
+    areass$
       .subscribe(
-        (sensores: any[]) => { // TRY
-          console.log('sensores: ', sensores);
-          this.sensores = sensores;
+        (areas: any[]) => { // TRY
+          console.log('areas: ', areas);
+          this.areas = areas;
+          //this.consultarSensores();
         },
-        (error) => { // CATC1H
+        (error) => { // CATCH
           console.error({
             error: error,
-            mensaje: 'Error consultando sensores'
+            mensaje: 'Error consultando areas'
           })
         }
       );
 
   }
+
+
 
 
   cancelar()
@@ -123,11 +130,10 @@ export class ModalEditarAreaComponent implements OnInit {
   {
     this.dialogRef.close({
       nombre:this.nombre,
-      descripcion:this.descripcion,
-      estado:this.estado,
+      codigoInterno:this.codigoInterno,
+      idArea:this.idArea,
       idDepartamento:this.idDepartamento,
       idEdificio:this.idEdificio,
-
     })
   }
 
