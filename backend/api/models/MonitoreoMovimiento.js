@@ -9,6 +9,9 @@ module.exports = {
 
   attributes: {
     valor: {
+      type: 'number',
+    },
+    idSensor: {
       type: 'number'
     }
   },

@@ -1,12 +1,13 @@
 var five = require('johnny-five');
 var board = new five.Board({
-  port: "COM5"
+  port: "COM5",
+  name: '1'
 });
 
 module.exports.johnny = {
   board:board,
   five:five,
-  proximity:null
+  proximity:null,
 };
 
 

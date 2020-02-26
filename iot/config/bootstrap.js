@@ -49,7 +49,7 @@ var board = new  five.Board({
 };*/
 const axios = require('axios');
 module.exports.bootstrap =  function(done) {
-
+  var name = sails.config.johnny.board.name
   sails.config.johnny.board.on("ready", function () {
 
     var proximity = new sails.config.johnny.five.Proximity({controller: 'HCSR04', pin: 7});
@@ -63,6 +63,7 @@ module.exports.bootstrap =  function(done) {
       const {centimeters, inches} = proximity;
 
       if(centimeters < 20){
+        console.log(name);
         console.log("Proximity: ");
         console.log("  cm  : ", centimeters);
         console.log("  in  : ", inches);
@@ -70,7 +71,8 @@ module.exports.bootstrap =  function(done) {
         const respuestaServidor = await axios
           .post('http://localhost:1337/MonitoreoMovimiento',
             {
-              valor: centimeters
+              valor: centimeters,
+              idSensor: name
             }
           );
         console.log('Respuesta del servidor', respuestaServidor)
