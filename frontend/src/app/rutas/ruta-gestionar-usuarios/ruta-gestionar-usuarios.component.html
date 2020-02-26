@@ -1,4 +1,4 @@
-<h2>Gestión de usuarios</h2>
+<h1>Gestión de Usuarios</h1>
 <span class="ui-float-label">
   <input id="float-input"
          type="text"
@@ -25,10 +25,9 @@
   <ng-template pTemplate="header">
     <tr>
       <th>Nombre</th>
-      <th>Apellido</th>
       <th>Correo</th>
+      <th>Estado</th>
       <th>Rol</th>
-      <th>Acciones</th>
     </tr>
     <tr>
       <th>
@@ -41,33 +40,32 @@
       <th>
         <input type="text"
                pInputText
-               name="apellido"
+               name="rol"
                [(ngModel)]="apellidoFiltrado"/>
       </th>
       <th>
         <input type="text"
                pInputText
                name="correo"
-               [(ngModel)]="correoElectronicoFiltrado"
-        />
+               [(ngModel)]="correoFiltrado"/>
       </th>
       <th>
         <input type="text"
                pInputText
-               name="rol"
-               [(ngModel)]="rolFiltrado"
-        />
+               name="estado"
+               [(ngModel)]="estadoFiltrado"/>
       </th>
-      <th>
-      </th>
+
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-usuario>
     <tr>
       <td>{{usuario.nombre}}</td>
       <td>{{usuario.apellido}}</td>
-      <td>{{usuario.correoElectronico}}</td>
-      <td>{{usuario.rol}}</td>
+      <td>{{usuario.correo}}</td>
+      <td>{{usuario.estado}}</td>
+
+      <td> <mat-checkbox  checked="{{usuario.estado}}" Disabled></mat-checkbox></td>
       <td>
         <p-button label="EDITAR" (click)="editar(usuario)">
         </p-button>
