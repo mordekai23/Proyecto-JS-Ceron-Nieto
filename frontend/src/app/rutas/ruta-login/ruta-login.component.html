@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <form #formularioEditar class="example-form">
   <div class="imgcontainer">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQwahiGX_3aJrGEFI-2WTMkXWLWB3AhKYnG0-ScUk-95qpMNW2a" alt="Avatar" class="avatar">
@@ -32,41 +30,3 @@
     </button>
   </div>
 </form>
-
-
-
->>>>>>> parent of cebea6d... update- recibir notificacion- politicas
-
-<form class="example-form">
-  <h1 mat-dialog-title>Iniciar Sesión</h1>
-  <mat-form-field class="example-full-width">
-    <mat-label>Correo</mat-label>
-    <input matInput placeholder="Correo"
-           id="correoId"
-           type="text"
-           name="correo"
-           [(ngModel)]="correo"
-           required
-           email="true">
-  </mat-form-field>
-
-  <mat-form-field class="example-full-width">
-    <mat-label>Contraseña</mat-label>
-    <input matInput placeholder="Contraseña"
-           id="passwordId"
-           type="password"
-           name="password"
-           [(ngModel)]="password"
-           required minlength="3" maxlength="30">
-  </mat-form-field>
-
-  <span style="color: #ed1b24">{{mensajeError}}</span>
-  <br>
-  <br>
-  <button mat-button class="inciar" (click)="login()">Iniciar
-  </button>
-
-</form>
-
-
-

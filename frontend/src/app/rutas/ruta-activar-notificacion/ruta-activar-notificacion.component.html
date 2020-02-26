@@ -1,0 +1,13 @@
+<form class="example-form">
+  <br>
+  <mat-toolbar>Notificación</mat-toolbar>
+  <br>
+  <mat-label>Nombre: {{nombre}}  {{apellido}}</mat-label>
+  <br>
+  <br>
+  <mat-label>Correo: {{correoElectronico}}</mat-label>
+  <br>
+  <br>
+  <mat-slide-toggle [(ngModel)]="checked" (change)="activar()" name="activar" id="activarId">Activar Notificaciones</mat-slide-toggle>
+</form>
+

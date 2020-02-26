@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RutaLoginComponent } from './rutas/ruta-login/ruta-login.component';
 import { RutaGestionarUsuariosComponent } from './rutas/ruta-gestionar-usuarios/ruta-gestionar-usuarios.component';
-import { RutaAdministrarSensoresComponent } from './rutas/ruta-administrar-sensores/ruta-administrar-sensores.component';
 import { RutaSensorAreaUsuarioComponent } from './rutas/ruta-sensor-area-usuario/ruta-sensor-area-usuario.component';
 import { RutaGestionEdificiosComponent } from './rutas/ruta-gestion-edificios/ruta-gestion-edificios.component';
 import { RutaGestionAreasComponent } from './rutas/ruta-gestion-areas/ruta-gestion-areas.component';
@@ -26,27 +25,45 @@ import {AreaRestService} from "./services/rest/area-rest.service";
 import {MovimientoRestService} from "./services/rest/movimiento-rest.service";
 import {HttpClientModule} from "@angular/common/http";
 import {ModalEditarDepartamentoComponent} from "./modales/modal-editar-departamento/modal-editar-departamento.component";
-import {RutaAdministrarDepartamentosComponent} from "./rutas/ruta-administrar-departamentos/ruta-administrar-departamentos.component";
 import {ModalEditarUsuarioComponent} from "./modales/modal-editar-usuario/modal-editar-usuario.component";
 import {AuthServices} from "./services/auth/authService";
 import { RutaInicioComponent } from './rutas/ruta-inicio/ruta-inicio.component';
+import {AreaUsuarioRestService} from "./services/rest/areaUsuario-rest.service";
+import {DepartamentoRestService} from "./services/rest/departamento-rest.service";
+import {SensorRestService} from "./services/rest/sensor_rest.service";
+import {UsuarioRestService} from "./services/rest/usuario_rest.service";
+import {ModalEditarAreaUsuarioComponent} from "./modales/modal-editar-area-usuario/modal-editar-area-usuario.component";
+import { RutaActivarNotificacionComponent } from './rutas/ruta-activar-notificacion/ruta-activar-notificacion.component';
+import { ModalEditarSensorComponent } from './modales/modal-editar-sensor/modal-editar-sensor.component';
+import {RutaGestionDepartamentosComponent} from "./rutas/ruta-gestion-departamentos/ruta-gestion-departamentos.component";
+import {RutaGestionSensoresComponent} from "./rutas/ruta-gestion-sensores/ruta-gestion-sensores.component";
+import {RutaRecibirNotificacionComponent} from "./rutas/ruta-recibir-notificacion/ruta-recibir-notificacion.component";
+import {MatListModule} from "@angular/material/list";
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
     AppComponent,
     RutaLoginComponent,
     RutaGestionarUsuariosComponent,
-    RutaAdministrarSensoresComponent,
     RutaSensorAreaUsuarioComponent,
     RutaGestionEdificiosComponent,
     RutaGestionAreasComponent,
     RutaGestionMovimientoComponent,
-    RutaAdministrarDepartamentosComponent,
     ModalEditarAreaComponent,
+    ModalEditarAreaUsuarioComponent,
     ModalEditarDepartamentoComponent,
     ModalEditarEdificioComponent,
     ModalEditarUsuarioComponent,
     RutaInicioComponent,
+    RutaActivarNotificacionComponent,
+    ModalEditarSensorComponent,
+    RutaGestionDepartamentosComponent,
+    RutaGestionSensoresComponent,
+    RutaRecibirNotificacionComponent
   ],
   imports: [
     BrowserModule,
@@ -62,13 +79,20 @@ import { RutaInicioComponent } from './rutas/ruta-inicio/ruta-inicio.component';
     ButtonModule,
     TableModule,
     HttpClientModule,
+    MatListModule,
+    MatSlideToggleModule,
+    MatCardModule,
+    MatIconModule,
+    MatToolbarModule,
   ],
   entryComponents: [
-    ModalEditarEdificioComponent,
-    ModalEditarAreaComponent,
-    ModalEditarDepartamentoComponent,
-    ModalEditarUsuarioComponent,
 
+    ModalEditarAreaComponent,
+    ModalEditarAreaUsuarioComponent,
+    ModalEditarDepartamentoComponent,
+    ModalEditarEdificioComponent,
+    ModalEditarUsuarioComponent,
+    ModalEditarSensorComponent,
   ],
 
   providers: [
@@ -76,6 +100,10 @@ import { RutaInicioComponent } from './rutas/ruta-inicio/ruta-inicio.component';
     AreaRestService,
     MovimientoRestService,
     AuthServices,
+    AreaUsuarioRestService,
+    DepartamentoRestService,
+    SensorRestService,
+    UsuarioRestService,
   ],
   bootstrap: [AppComponent]
 })

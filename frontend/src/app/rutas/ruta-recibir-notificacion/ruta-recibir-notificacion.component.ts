@@ -18,9 +18,7 @@ export class RutaRecibirNotificacionComponent implements OnInit {
   ultimoMovimiento=[];
    moviminetoEditado= [];
    idUsuario="";
-   enviarNotificacion="";
-
-
+enviarNotificacion="";
   constructor(
     private readonly _httpClient: HttpClient,
     private readonly _authService:AuthServices,
@@ -29,9 +27,9 @@ export class RutaRecibirNotificacionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.idUsuario =this._authService.sesion.id;
     this.consultarSiSeEnviaNotificacion();
+
 
     console.log(this.fecha);
     this.fechaFormatoActual=`${
@@ -52,14 +50,14 @@ export class RutaRecibirNotificacionComponent implements OnInit {
         (movimientos: any[]) => { // TRY
           console.log('Movimiento: ',movimientos );
           this.movimientos = movimientos;
-          if(this.movimientos[this.movimientos.length-1].estadoNotificacion ===false && this.enviarNotificacion ==="S")          
+          if(this.movimientos[this.movimientos.length-1].estadoNotificacion ===false && this.enviarNotificacion ==="S")
           {
             this.ultimoMovimiento[0] = this.movimientos[this.movimientos.length-1];
             this.mensaje="Movimiento registrado en el sensor " +
               this.movimientos[this.movimientos.length-1].idSensor.codigoInterno + ' ' +
               this.movimientos[this.movimientos.length-1].idSensor.nombre;
           }
-         
+          //this.buscarUltimo();
         },
         (error) => { // CATC
           console.error({

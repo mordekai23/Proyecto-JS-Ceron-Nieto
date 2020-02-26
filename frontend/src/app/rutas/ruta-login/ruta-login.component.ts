@@ -11,6 +11,7 @@ export class RutaLoginComponent implements OnInit {
 correo="";
 password="";
 mensajeError="";
+
   constructor(
     private readonly _authService:AuthServices,
     private router:Router,
