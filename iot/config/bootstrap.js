@@ -61,7 +61,6 @@ module.exports.bootstrap =  function(done) {
     proximity.on("change", async () => {
       var sleep = require('sleep');
       const {centimeters, inches} = proximity;
-
       if(centimeters < 30){
         console.log("Proximity: ");
         console.log("  cm  : ", centimeters);
