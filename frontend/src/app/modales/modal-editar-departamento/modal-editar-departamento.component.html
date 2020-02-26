@@ -1,1 +1,32 @@
-<p>modal-editar-departamento works!</p>
+<h1 mat-dialog-title>Departamento</h1>
+<div mat-dialog-content>
+  <form #formularioEditar="ngForm" style="height: 250px;">
+    <mat-form-field class="example-full-width" >
+      <mat-label>Edificio</mat-label>
+      <mat-select id="edificioId" name="idEdificio" [(ngModel)]="idEdificio" required >
+        <mat-option [value]="edf.id" *ngFor="let edf of edificios" >
+          {{edf.nombre}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Número de departamento</mat-label>
+      <input matInput placeholder="Numero de departamento" id="numeroId" type="number" name="numeroDeDepartamento" [(ngModel)]="numeroDeDepartamento"
+             required>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Descripción</mat-label>
+      <input matInput placeholder="Descripción" id="descripcionId" type="text" name="descripcion" [(ngModel)]="descripcion"
+             required minlength="3" maxlength="50">
+    </mat-form-field>
+
+    <mat-checkbox id="estadoId" name="estado" [(ngModel)]="estado">Estado</mat-checkbox>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button label="Cancelar" styleClass="ui-button-secondary" (click)="cancelar()">Cancelar</button>
+  <button mat-button label="Aceptar" [disabled]="formularioEditar.invalid" styleClass="ui-button-success" (click)="aceptar()">Aceptar</button>
+</div>
+

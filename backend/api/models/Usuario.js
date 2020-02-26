@@ -8,16 +8,16 @@
 module.exports = {
 
   attributes: {
-    nombreUsuario: {
-      type: 'string'
+    nombre:{
+      type:'string'
+    },
+    apellido:{
+      type:'string'
     },
     password: {
       type: 'string'
     },
     correoElectronico: {
-      type: 'string'
-    },
-    estado: {
       type: 'string'
     },
     rol: {
@@ -29,7 +29,7 @@ module.exports = {
       via: 'idUsuario'  //nombre del campo foreing key en la tabla hijo
     },
 
-    areausuarioDelUsuario:{
+    areasUsuarioDelUsuario:{
       collection:'areaUsuario', //nombre del modelo hijo
       via: 'idUsuario'  //nombre del campo foreing key en la tabla hijo
     }
