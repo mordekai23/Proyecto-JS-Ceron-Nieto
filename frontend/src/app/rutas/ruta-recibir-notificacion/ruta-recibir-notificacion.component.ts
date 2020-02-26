@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {MovimientoRestService} from "../../services/rest/movimiento-rest.service";
 import {Router} from "@angular/router";
+import {AuthServices} from "../../services/auth/authService";
 
 @Component({
   selector: 'app-ruta-recibir-notificacion',
@@ -15,15 +16,21 @@ export class RutaRecibirNotificacionComponent implements OnInit {
   fecha= new Date();
   fechaFormatoActual="";
   ultimoMovimiento=[];
-   moviminetoEditado: [];
-
+   moviminetoEditado= [];
+   idUsuario="";
+enviarNotificacion="";
   constructor(
     private readonly _httpClient: HttpClient,
+    private readonly _authService:AuthServices,
     private readonly _movimientoRestService: MovimientoRestService,
     private router:Router,
   ) { }
 
   ngOnInit() {
+    this.idUsuario =this._authService.sesion.id;
+    this.consultarSiSeEnviaNotificacion();
+
+
     console.log(this.fecha);
     this.fechaFormatoActual=`${
       (this.fecha.getMonth()+1).toString().padStart(2, '0')}/${
@@ -43,7 +50,7 @@ export class RutaRecibirNotificacionComponent implements OnInit {
         (movimientos: any[]) => { // TRY
           console.log('Movimiento: ',movimientos );
           this.movimientos = movimientos;
-          if(this.movimientos[this.movimientos.length-1].estadoNotificacion ===false)
+          if(this.movimientos[this.movimientos.length-1].estadoNotificacion ===false && this.enviarNotificacion ==="S")
           {
             this.ultimoMovimiento[0] = this.movimientos[this.movimientos.length-1];
             this.mensaje="Movimiento registrado en el sensor " +
@@ -131,4 +138,21 @@ export class RutaRecibirNotificacionComponent implements OnInit {
 
   }
 
+  consultarSiSeEnviaNotificacion() { //http://localhost:1337/areaUsuario?idUsuario=1
+    const urlAreaUsuario = this.url + '/areaUsuario?idUsuario='+this.idUsuario;
+    const areaUsuario$ = this._httpClient.get(urlAreaUsuario);
+    areaUsuario$
+      .subscribe(
+        (areaUsuario: any[]) => { // TRY
+          console.log('Movimiento: ',areaUsuario );
+          this.enviarNotificacion = areaUsuario[0].enviarNotificacion;
+        },
+        (error) => { // CATC
+          console.error({
+            error: error,
+            mensaje: 'Error consultando movimientos'
+          })
+        }
+      );
+  }
 }
