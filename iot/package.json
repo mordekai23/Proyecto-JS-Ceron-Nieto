@@ -17,7 +17,7 @@
     "firmata": "^2.2.0",
     "firmata-io": "^2.2.0",
     "firmata-party": "^2.0.0",
-    "grunt": "1.0.4",
+    "grunt": "1.5.3",
     "johnny-five": "^1.4.0",
     "nino-io": "^0.2.1",
     "nodebots-hcsr04": "^0.5.0",
