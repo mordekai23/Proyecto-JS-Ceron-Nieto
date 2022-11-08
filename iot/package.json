@@ -11,7 +11,7 @@
     "arduino-firmata": "^0.3.4",
     "arduino-iot-js": "^0.5.0",
     "arduino-node": "^0.5.2",
-    "avrgirl-arduino": "^4.2.1",
+    "avrgirl-arduino": "^5.0.1",
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "firmata": "^2.2.0",
