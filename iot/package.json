@@ -13,7 +13,7 @@
     "arduino-node": "^0.5.2",
     "avrgirl-arduino": "^4.2.1",
     "axios": "^0.19.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "firmata": "^2.2.0",
     "firmata-io": "^2.2.0",
     "firmata-party": "^2.0.0",
